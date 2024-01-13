@@ -61,7 +61,7 @@ class StartView extends GetView<StartController> {
                       'View Incidents',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 18,
+                        fontSize: 16,
                       ),
                     ),
                     onPressed: () {
