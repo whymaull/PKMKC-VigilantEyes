@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:vigilanteyes/app/modules/optionmenu/bindings/optionmenu_binding.dart';
-import 'package:vigilanteyes/app/modules/optionmenu/views/optionmenu_view.dart';
 
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/login/bindings/login_binding.dart';
+import '../modules/login/views/login_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/start/bindings/start_binding.dart';
@@ -33,9 +33,9 @@ class AppPages {
       binding: StartBinding(),
     ),
     GetPage(
-      name: _Paths.OPTIONMENU,
-      page: () => const OptionmenuView(),
-      binding: OptionmenuBinding(),
+      name: _Paths.LOGIN,
+      page: () => const LoginView(),
+      binding: LoginBinding(),
     ),
   ];
 }
