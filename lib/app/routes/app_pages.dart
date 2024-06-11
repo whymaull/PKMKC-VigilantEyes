@@ -1,5 +1,9 @@
 import 'package:get/get.dart';
 
+import '../modules/daftar/bindings/daftar_binding.dart';
+import '../modules/daftar/views/daftar_view.dart';
+import '../modules/dashboardSchool/bindings/dashboard_school_binding.dart';
+import '../modules/dashboardSchool/views/dashboard_school_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -14,7 +18,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH;
+  static const INITIAL = Routes.DASHBOARD_SCHOOL;
 
   static final routes = [
     GetPage(
@@ -36,6 +40,16 @@ class AppPages {
       name: _Paths.LOGIN,
       page: () => const LoginView(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.DAFTAR,
+      page: () => const DaftarView(),
+      binding: DaftarBinding(),
+    ),
+    GetPage(
+      name: _Paths.DASHBOARD_SCHOOL,
+      page: () => const DashboardSchoolView(),
+      binding: DashboardSchoolBinding(),
     ),
   ];
 }

@@ -37,6 +37,7 @@ class ListSchool extends StatelessWidget {
             ),
           ),
         ),
+        onTap: () {},
       ),
     );
   }

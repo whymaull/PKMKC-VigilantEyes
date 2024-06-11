@@ -7,6 +7,8 @@ abstract class Routes {
   static const START = _Paths.START;
   static const LOGIN = _Paths.LOGIN;
   static const HOME = _Paths.HOME;
+  static const DAFTAR = _Paths.DAFTAR;
+  static const DASHBOARD_SCHOOL = _Paths.DASHBOARD_SCHOOL;
 }
 
 abstract class _Paths {
@@ -15,4 +17,6 @@ abstract class _Paths {
   static const START = '/start';
   static const LOGIN = '/login';
   static const HOME = '/home';
+  static const DAFTAR = '/daftar';
+  static const DASHBOARD_SCHOOL = '/dashboard-school';
 }

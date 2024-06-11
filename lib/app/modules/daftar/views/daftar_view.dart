@@ -3,11 +3,10 @@ import 'package:get/get.dart';
 import 'package:vigilanteyes/app/widget/button.dart';
 import 'package:vigilanteyes/app/widget/input_field.dart';
 
-import '../controllers/login_controller.dart';
+import '../controllers/daftar_controller.dart';
 
-class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
-
+class DaftarView extends GetView<DaftarController> {
+  const DaftarView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,19 +17,15 @@ class LoginView extends GetView<LoginController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/login.png',
+                'assets/regist.png',
                 height: 200,
               ),
               const SizedBox(height: 20),
-              const Text(
-                'Stay informed about bullying\nincidence in your school',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black,
-                ),
+              const inputTextField(
+                title: "Masukkan Nama Anda",
+                iconTextField: Icon(Icons.person),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               const inputTextField(
                 title: "Masukkan Email Anda",
                 iconTextField: Icon(Icons.email),
@@ -42,19 +37,19 @@ class LoginView extends GetView<LoginController> {
               ),
               const SizedBox(height: 30),
               const widgetButton(
-                title: "Log In",
+                title: "Sign Up",
                 tinggiTombol: 56,
               ),
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Don't have an account?"),
+                  const Text("Already have an account?"),
                   const SizedBox(width: 5),
                   GestureDetector(
                     onTap: () {},
                     child: const Text(
-                      'Sign up',
+                      'Log in',
                       style: TextStyle(
                         color: Colors.blue,
                         fontWeight: FontWeight.bold,

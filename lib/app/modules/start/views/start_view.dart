@@ -65,7 +65,7 @@ class StartView extends GetView<StartController> {
                       ),
                     ),
                     onPressed: () {
-                      Get.toNamed(Routes.OPTIONMENU);
+                      Get.toNamed(Routes.HOME);
                     },
                   ),
                 ),
