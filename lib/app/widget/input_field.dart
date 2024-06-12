@@ -29,7 +29,8 @@ class inputTextField extends StatelessWidget {
           borderSide: const BorderSide(color: Colors.transparent),
         ),
         filled: true,
-        fillColor: Colors.grey[100],
+        fillColor: Colors.grey[200],
+        contentPadding: const EdgeInsets.only(left: 24),
       ),
     );
   }

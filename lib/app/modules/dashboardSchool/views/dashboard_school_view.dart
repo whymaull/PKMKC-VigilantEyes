@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:vigilanteyes/app/widget/bullying_card.dart';
+import 'package:vigilanteyes/app/widget/bullying_type_card.dart';
 
 import '../controllers/dashboard_school_controller.dart';
 
