@@ -8,6 +8,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/notifikasi/bindings/notifikasi_binding.dart';
+import '../modules/notifikasi/views/notifikasi_view.dart';
 import '../modules/recent/bindings/recent_binding.dart';
 import '../modules/recent/views/recent_view.dart';
 import '../modules/schoolCCTV/bindings/school_cctv_binding.dart';
@@ -22,7 +24,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.RECENT;
+  static const INITIAL = Routes.NOTIFIKASI;
 
   static final routes = [
     GetPage(
@@ -64,6 +66,11 @@ class AppPages {
       name: _Paths.RECENT,
       page: () => const RecentView(),
       binding: RecentBinding(),
+    ),
+    GetPage(
+      name: _Paths.NOTIFIKASI,
+      page: () => const NotifikasiView(),
+      binding: NotifikasiBinding(),
     ),
   ];
 }
