@@ -24,7 +24,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.NOTIFIKASI;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = [
     GetPage(
@@ -44,7 +44,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LOGIN,
-      page: () => const LoginView(),
+      page: () => LoginView(),
       binding: LoginBinding(),
     ),
     GetPage(

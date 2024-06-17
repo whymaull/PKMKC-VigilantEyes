@@ -1,0 +1,19 @@
+const baseUrl = "https://ybqcrtnatzmiebkzxwon.supabase.co/rest/v1";
+const baseStorageUrl = "https://ybqcrtnatzmiebkzxwon.supabase.co";
+const apiKey =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlicWNydG5hdHptaWVia3p4d29uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTg1NDQ4MTAsImV4cCI6MjAzNDEyMDgxMH0.QlSNOyPZDEVycbyDDbFDlwyiyLTiWP_64OJSp9Vk758";
+const bucketAgentPhoto = "agent_photo";
+const bucketClientPhoto = "client_photo";
+const bucketAgentCertificate = "agent_certificate";
+const bucketProductPhoto = "product_photo";
+const bucketNotifPhoto = "notif_photo";
+const icHome = "assets/images/icons/ic_home.png";
+const icLogout = "assets/images/icons/ic_logout.png";
+const icNotification = "assets/images/icons/ic_notification.png";
+const icPerson = "assets/images/icons/ic_person.png";
+const icPlus = "assets/images/icons/ic_plus.png";
+const icProduct = "assets/images/icons/ic_product.png";
+const icProfile = "assets/images/icons/ic_profile.png";
+const icStore = "assets/images/icons/ic_store.png";
+const icTransaction = "assets/images/icons/ic_transaction.png";
+const icCarbon = "assets/images/icons/ic_carbon.png";

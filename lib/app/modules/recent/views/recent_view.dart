@@ -17,7 +17,7 @@ class RecentView extends GetView<RecentController> {
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Expanded(
-                child: inputTextField(
+                child: InputTextField(
                   title: 'Search for bullying by class',
                   iconTextField: Icon(Icons.search),
                 ),

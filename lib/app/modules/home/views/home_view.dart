@@ -46,7 +46,7 @@ class HomeView extends GetView<HomeController> {
               ),
               Expanded(
                 child: ListView(
-                  children: const [
+                  children: [
                     ListSchool(
                       title: 'Sekolah 1',
                       imagePath: 'assets/logo.png',

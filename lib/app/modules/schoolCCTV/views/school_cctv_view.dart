@@ -38,10 +38,13 @@ class SchoolCCTVView extends GetView<SchoolCCTVController> {
               ),
               Expanded(
                 child: ListView(
-                  children: const [
+                  children: [
                     ListSchool(
-                      title: 'CCTV Kelas 1',
+                      title: 'CCTV Kelas 10',
                       imagePath: 'assets/logo.png',
+                      onTap: () => AlertDialog(
+                        title: Text("data"),
+                      ),
                     ),
                     ListSchool(
                       title: 'CCTV Kelas 2',
@@ -99,6 +102,40 @@ class SchoolCCTVView extends GetView<SchoolCCTVController> {
         showUnselectedLabels: false,
         onTap: (index) {},
       ),
+    );
+  }
+
+  void showPasswordDialog(BuildContext context) {
+    TextEditingController passwordController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Enter Password'),
+          content: TextField(
+            controller: passwordController,
+            obscureText: true,
+            decoration: InputDecoration(hintText: 'Password'),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                // Handle password confirmation here
+                print('Password entered: ${passwordController.text}');
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

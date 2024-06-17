@@ -32,14 +32,10 @@ class StartView extends GetView<StartController> {
                         ),
                       ),
                     ),
-                    Container(
-                      margin:
-                          const EdgeInsets.only(left: 36, right: 36, top: 24),
-                      child: const Text(
-                        'Monitor and report bullying Incidents in real-time!',
-                        style: TextStyle(fontSize: 16),
-                        textAlign: TextAlign.center,
-                      ),
+                    const Text(
+                      'Monitor and report bullying Incidents in real-time!',
+                      style: TextStyle(fontSize: 16),
+                      textAlign: TextAlign.center,
                     ),
                   ],
                 ),
@@ -65,7 +61,7 @@ class StartView extends GetView<StartController> {
                       ),
                     ),
                     onPressed: () {
-                      Get.toNamed(Routes.HOME);
+                      Get.toNamed(Routes.LOGIN);
                     },
                   ),
                 ),

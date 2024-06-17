@@ -21,17 +21,17 @@ class DaftarView extends GetView<DaftarController> {
                 height: 200,
               ),
               const SizedBox(height: 20),
-              const inputTextField(
+              const InputTextField(
                 title: "Masukkan Nama Anda",
                 iconTextField: Icon(Icons.person),
               ),
               const SizedBox(height: 20),
-              const inputTextField(
+              const InputTextField(
                 title: "Masukkan Email Anda",
                 iconTextField: Icon(Icons.email),
               ),
               const SizedBox(height: 20),
-              const inputTextField(
+              const InputTextField(
                 title: "Masukkan Password Anda",
                 iconTextField: Icon(Icons.lock),
               ),
