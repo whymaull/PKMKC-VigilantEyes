@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:vigilanteyes/app/widget/list_school.dart';
@@ -11,7 +12,8 @@ class SchoolCCTVView extends GetView<SchoolCCTVController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -36,39 +38,47 @@ class SchoolCCTVView extends GetView<SchoolCCTVController> {
                 padding: EdgeInsets.only(top: 4, bottom: 16),
               ),
               Expanded(
-                child: ListView(
-                  children: [
-                    ListSchool(
+                child: ListView.builder(
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return ListSchool(
                       title: 'CCTV Kelas 10',
                       imagePath: 'assets/logo.png',
-                    ),
-                    ListSchool(
-                      title: 'CCTV Kelas 2',
-                      imagePath: 'assets/logo.png',
-                    ),
-                    ListSchool(
-                      title: 'CCTV Kelas 3',
-                      imagePath: 'assets/logo.png',
-                    ),
-                    ListSchool(
-                      title: 'CCTV Kelas 4',
-                      imagePath: 'assets/logo.png',
-                    ),
-                    ListSchool(
-                      title: 'CCTV Kelas 5',
-                      imagePath: 'assets/logo.png',
-                    ),
-                    ListSchool(
-                      title: 'CCTV Kelas 6',
-                      imagePath: 'assets/logo.png',
-                    ),
-                    ListSchool(
-                      title: 'CCTV Kantin',
-                      imagePath: 'assets/logo.png',
-                    ),
-                  ],
+                    );
+                  },
                 ),
-              ),
+              )
+              // Expanded(
+              //   child: ListView(
+              //     children: [
+
+              //       ListSchool(
+              //         title: 'CCTV Kelas 2',
+              //         imagePath: 'assets/logo.png',
+              //       ),
+              //       ListSchool(
+              //         title: 'CCTV Kelas 3',
+              //         imagePath: 'assets/logo.png',
+              //       ),
+              //       ListSchool(
+              //         title: 'CCTV Kelas 4',
+              //         imagePath: 'assets/logo.png',
+              //       ),
+              //       ListSchool(
+              //         title: 'CCTV Kelas 5',
+              //         imagePath: 'assets/logo.png',
+              //       ),
+              //       ListSchool(
+              //         title: 'CCTV Kelas 6',
+              //         imagePath: 'assets/logo.png',
+              //       ),
+              //       ListSchool(
+              //         title: 'CCTV Kantin',
+              //         imagePath: 'assets/logo.png',
+              //       ),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),

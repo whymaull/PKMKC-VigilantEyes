@@ -6,6 +6,7 @@ class SplashController extends GetxController {
   final count = 0.obs;
   @override
   void onInit() {
+    _onInit();
     super.onInit();
   }
 

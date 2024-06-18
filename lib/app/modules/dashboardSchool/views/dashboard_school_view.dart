@@ -21,7 +21,7 @@ class DashboardSchoolView extends GetView<DashboardSchoolController> {
               children: [
                 SchoolHomeView(),
                 SchoolCCTVView(),
-                // RecentView(),
+                RecentView(),
               ],
             ),
           ),
@@ -44,22 +44,22 @@ class DashboardSchoolView extends GetView<DashboardSchoolController> {
         itemNavBar(
           icon: Icons.home,
           label: '',
-          isActive: controller.tabIndex == 1,
+          isActive: controller.tabIndex == 0,
         ),
         itemNavBar(
           icon: Icons.search,
           label: '',
-          isActive: controller.tabIndex == 2,
+          isActive: controller.tabIndex == 1,
         ),
         itemNavBar(
           icon: Icons.list,
           label: '',
-          isActive: controller.tabIndex == 3,
+          isActive: controller.tabIndex == 2,
         ),
         itemNavBar(
           icon: Icons.person,
           label: '',
-          isActive: controller.tabIndex == 4,
+          isActive: controller.tabIndex == 3,
         ),
       ],
     );
@@ -68,7 +68,10 @@ class DashboardSchoolView extends GetView<DashboardSchoolController> {
   itemNavBar(
       {required IconData icon, required String label, bool isActive = false}) {
     return BottomNavigationBarItem(
-      icon: Icon(icon),
+      icon: Icon(
+        icon,
+        color: !isActive ? Colors.blue : Colors.black,
+      ),
       label: label,
     );
   }

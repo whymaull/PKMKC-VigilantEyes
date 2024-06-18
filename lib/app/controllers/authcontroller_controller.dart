@@ -111,13 +111,13 @@ class AuthController extends GetxController {
         password: password,
       );
 
-      final clientRepo = ClientRepository();
+      // final clientRepo = ClientRepository();
       // final agentRepo = AgentRepository();
-      var uuid = FirebaseAuth.instance.currentUser!.uid;
-      print(uuid);
+      // var uuid = FirebaseAuth.instance.currentUser!.uid;
+      // print(uuid);
 
-      String token = LocalDb.fcmToken;
-      print(token);
+      // String token = LocalDb.fcmToken;
+      // print(token);
 
       // ClientEntity? resultUserClient = await clientRepo.findByUuid(uuid);
       // AgentEntity? resultAgent = await agentRepo.findByUUID(uuid);

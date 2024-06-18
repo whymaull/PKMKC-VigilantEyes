@@ -18,6 +18,9 @@ void main() async {
       title: "VigilantEyes",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white, // Set background color to white
+      ),
     ),
   );
 }
