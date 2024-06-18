@@ -144,10 +144,16 @@ class AuthController extends GetxController {
       // print("ini agent id $isUpdated ini nya  $token");
 
       Get.back(); // Tutup dialog loading
-      LocalDb.loggedInClient = true;
+      if (email == "admin@gmail.com") {
+        LocalDb.loggedIn = true;
+        Get.offAllNamed(Routes.HOME);
+      } else {
+        Get.offAllNamed(Routes.DASHBOARD_SCHOOL);
+        LocalDb.loggedInClient = true;
+      }
+
       // LocalDb.loggedIn = true;
 
-      Get.offAllNamed(Routes.SCHOOL_C_C_T_V);
       Get.snackbar('Berhasil', 'Login berhasil');
     } catch (e) {
       // Tangani kesalahan
