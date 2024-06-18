@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/SchoolHome/bindings/school_home_binding.dart';
+import '../modules/SchoolHome/views/school_home_view.dart';
 import '../modules/daftar/bindings/daftar_binding.dart';
 import '../modules/daftar/views/daftar_view.dart';
 import '../modules/dashboardSchool/bindings/dashboard_school_binding.dart';
@@ -24,7 +26,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH;
+  static const INITIAL = Routes.DASHBOARD_SCHOOL;
 
   static final routes = [
     GetPage(
@@ -71,6 +73,11 @@ class AppPages {
       name: _Paths.NOTIFIKASI,
       page: () => const NotifikasiView(),
       binding: NotifikasiBinding(),
+    ),
+    GetPage(
+      name: _Paths.SCHOOL_HOME,
+      page: () => const SchoolHomeView(),
+      binding: SchoolHomeBinding(),
     ),
   ];
 }

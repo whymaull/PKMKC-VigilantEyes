@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class DashboardSchoolController extends GetxController {
-  //TODO: Implement DashboardSchoolController
+class SchoolHomeController extends GetxController {
+  //TODO: Implement SchoolHomeController
 
   final count = 0.obs;
   @override
@@ -20,12 +20,4 @@ class DashboardSchoolController extends GetxController {
   }
 
   void increment() => count.value++;
-
-  var tabIndex = 0;
-
-  void changeTabIndex(int index) {
-    tabIndex = index;
-
-    update();
-  }
 }

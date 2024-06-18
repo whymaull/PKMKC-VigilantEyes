@@ -11,8 +11,7 @@ class SchoolCCTVView extends GetView<SchoolCCTVController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -42,9 +41,6 @@ class SchoolCCTVView extends GetView<SchoolCCTVController> {
                     ListSchool(
                       title: 'CCTV Kelas 10',
                       imagePath: 'assets/logo.png',
-                      onTap: () => AlertDialog(
-                        title: Text("data"),
-                      ),
                     ),
                     ListSchool(
                       title: 'CCTV Kelas 2',
@@ -76,31 +72,6 @@ class SchoolCCTVView extends GetView<SchoolCCTVController> {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: "",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: "",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "",
-          ),
-        ],
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        onTap: (index) {},
       ),
     );
   }

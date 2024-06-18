@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:vigilanteyes/app/routes/app_pages.dart';
 import 'package:vigilanteyes/app/widget/list_school.dart';
+import 'package:vigilanteyes/app/widget/show_dialog_card.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -50,50 +52,126 @@ class HomeView extends GetView<HomeController> {
                     ListSchool(
                       title: 'Sekolah 1',
                       imagePath: 'assets/logo.png',
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => ShowDialogCard(
+                            onTap: () {
+                              Get.offAllNamed(Routes.DASHBOARD_SCHOOL);
+                            },
+                          ),
+                        );
+                      },
                     ),
                     ListSchool(
                       title: 'Sekolah 2',
                       imagePath: 'assets/logo.png',
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => ShowDialogCard(),
+                        );
+                      },
                     ),
                     ListSchool(
                       title: 'Sekolah 3',
                       imagePath: 'assets/logo.png',
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => ShowDialogCard(),
+                        );
+                      },
                     ),
                     ListSchool(
                       title: 'Sekolah 4',
                       imagePath: 'assets/logo.png',
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => ShowDialogCard(),
+                        );
+                      },
                     ),
                     ListSchool(
                       title: 'Sekolah 5',
                       imagePath: 'assets/logo.png',
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => ShowDialogCard(),
+                        );
+                      },
                     ),
                     ListSchool(
                       title: 'Sekolah 6',
                       imagePath: 'assets/logo.png',
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => ShowDialogCard(),
+                        );
+                      },
                     ),
                     ListSchool(
                       title: 'Sekolah 7',
                       imagePath: 'assets/logo.png',
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => ShowDialogCard(),
+                        );
+                      },
                     ),
                     ListSchool(
                       title: 'Sekolah 8',
                       imagePath: 'assets/logo.png',
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => ShowDialogCard(),
+                        );
+                      },
                     ),
                     ListSchool(
                       title: 'Sekolah 9',
                       imagePath: 'assets/logo.png',
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => ShowDialogCard(),
+                        );
+                      },
                     ),
                     ListSchool(
                       title: 'Sekolah 10',
                       imagePath: 'assets/logo.png',
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => ShowDialogCard(),
+                        );
+                      },
                     ),
                     ListSchool(
                       title: 'Sekolah 11',
                       imagePath: 'assets/logo.png',
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => ShowDialogCard(),
+                        );
+                      },
                     ),
                     ListSchool(
                       title: 'Sekolah 12',
                       imagePath: 'assets/logo.png',
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => ShowDialogCard(),
+                        );
+                      },
                     ),
                   ],
                 ),

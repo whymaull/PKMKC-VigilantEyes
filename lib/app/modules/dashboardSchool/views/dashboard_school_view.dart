@@ -1,81 +1,75 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:vigilanteyes/app/widget/bullying_type_card.dart';
+import 'package:vigilanteyes/app/modules/SchoolHome/views/school_home_view.dart';
+import 'package:vigilanteyes/app/modules/recent/views/recent_view.dart';
+import 'package:vigilanteyes/app/modules/schoolCCTV/views/school_cctv_view.dart';
 
 import '../controllers/dashboard_school_controller.dart';
 
 class DashboardSchoolView extends GetView<DashboardSchoolController> {
   const DashboardSchoolView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return GetBuilder<DashboardSchoolController>(
+      builder: (controller) {
+        return Scaffold(
+          body: SafeArea(
+            child: IndexedStack(
+              index: controller.tabIndex,
               children: [
-                const SizedBox(height: 10),
-                Container(
-                  height: 200,
-                  color: Colors.grey[200],
-                  child: const Center(child: Text('Grafik Bullying di sini')),
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  'Types of bullying',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                bullyingCard(
-                  title: 'Physical Bullying',
-                ),
-                bullyingCard(title: 'Verbal Bullying'),
-                bullyingCard(title: 'Non-Verbal Bullying'),
-                bullyingCard(title: 'Sexual Bullying'),
+                SchoolHomeView(),
+                SchoolCCTVView(),
+                // RecentView(),
               ],
             ),
           ),
+          bottomNavigationBar: buildBottomNavBar(controller),
+        );
+      },
+    );
+  }
+
+  buildBottomNavBar(DashboardSchoolController controller) {
+    return BottomNavigationBar(
+      selectedItemColor: Colors.blue,
+      unselectedItemColor: Colors.grey,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      onTap: controller.changeTabIndex,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Colors.white,
+      items: [
+        itemNavBar(
+          icon: Icons.home,
+          label: '',
+          isActive: controller.tabIndex == 1,
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: '',
-          ),
-        ],
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        onTap: (index) {},
-      ),
+        itemNavBar(
+          icon: Icons.search,
+          label: '',
+          isActive: controller.tabIndex == 2,
+        ),
+        itemNavBar(
+          icon: Icons.list,
+          label: '',
+          isActive: controller.tabIndex == 3,
+        ),
+        itemNavBar(
+          icon: Icons.person,
+          label: '',
+          isActive: controller.tabIndex == 4,
+        ),
+      ],
+    );
+  }
+
+  itemNavBar(
+      {required IconData icon, required String label, bool isActive = false}) {
+    return BottomNavigationBarItem(
+      icon: Icon(icon),
+      label: label,
     );
   }
 }

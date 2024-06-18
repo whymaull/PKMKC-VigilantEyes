@@ -12,6 +12,7 @@ abstract class Routes {
   static const SCHOOL_C_C_T_V = _Paths.SCHOOL_C_C_T_V;
   static const RECENT = _Paths.RECENT;
   static const NOTIFIKASI = _Paths.NOTIFIKASI;
+  static const SCHOOL_HOME = _Paths.SCHOOL_HOME;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const SCHOOL_C_C_T_V = '/school-c-c-t-v';
   static const RECENT = '/recent';
   static const NOTIFIKASI = '/notifikasi';
+  static const SCHOOL_HOME = '/school-home';
 }
