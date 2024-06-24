@@ -13,6 +13,7 @@ abstract class Routes {
   static const RECENT = _Paths.RECENT;
   static const NOTIFIKASI = _Paths.NOTIFIKASI;
   static const SCHOOL_HOME = _Paths.SCHOOL_HOME;
+  static const PROFILE = _Paths.PROFILE;
 }
 
 abstract class _Paths {
@@ -27,4 +28,5 @@ abstract class _Paths {
   static const RECENT = '/recent';
   static const NOTIFIKASI = '/notifikasi';
   static const SCHOOL_HOME = '/school-home';
+  static const PROFILE = '/profile';
 }

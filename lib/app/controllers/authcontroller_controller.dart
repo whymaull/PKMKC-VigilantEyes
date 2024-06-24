@@ -3,9 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vigilanteyes/app/core/services/local_db.dart';
-import 'package:vigilanteyes/app/entities/client_entity.dart';
-import 'package:vigilanteyes/app/entities/user.dart';
-import 'package:vigilanteyes/app/repositories/client_repository.dart';
+import 'package:vigilanteyes/app/data/entities/client_entity.dart';
+import 'package:vigilanteyes/app/data/entities/user.dart';
+import 'package:vigilanteyes/app/data/repositories/client_repository.dart';
 import 'package:vigilanteyes/app/routes/app_pages.dart';
 
 class AuthController extends GetxController {
@@ -145,14 +145,13 @@ class AuthController extends GetxController {
 
       Get.back(); // Tutup dialog loading
       if (email == "admin@gmail.com") {
-        LocalDb.loggedIn = true;
+        LocalDb.loggedAdmin = true;
         Get.offAllNamed(Routes.HOME);
       } else {
         Get.offAllNamed(Routes.DASHBOARD_SCHOOL);
-        LocalDb.loggedInClient = true;
+        LocalDb.loggedClient = true;
       }
-
-      // LocalDb.loggedIn = true;
+      LocalDb.repeat = true;
 
       Get.snackbar('Berhasil', 'Login berhasil');
     } catch (e) {
@@ -174,8 +173,6 @@ class AuthController extends GetxController {
         Get.snackbar('Error', 'Email tidak terdaftar');
       } else {
         Get.back(); // Tutup dialog loading
-        print(e.toString());
-        print(e.toString());
         Get.snackbar('Error', e.toString());
       }
     }
@@ -189,7 +186,8 @@ class AuthController extends GetxController {
       );
 
       await _auth.signOut();
-      LocalDb.loggedIn = false;
+      LocalDb.loggedAdmin = false;
+      LocalDb.repeat = true;
       Get.offAllNamed(Routes.LOGIN);
 
       Get.back(); // Tutup dialog loading

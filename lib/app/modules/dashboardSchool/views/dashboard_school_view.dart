@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:vigilanteyes/app/modules/SchoolHome/views/school_home_view.dart';
+import 'package:vigilanteyes/app/modules/profile/views/profile_view.dart';
 import 'package:vigilanteyes/app/modules/recent/views/recent_view.dart';
 import 'package:vigilanteyes/app/modules/schoolCCTV/views/school_cctv_view.dart';
 
@@ -22,6 +23,7 @@ class DashboardSchoolView extends GetView<DashboardSchoolController> {
                 SchoolHomeView(),
                 SchoolCCTVView(),
                 RecentView(),
+                ProfileView(),
               ],
             ),
           ),

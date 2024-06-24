@@ -6,7 +6,7 @@ import '../controllers/splash_controller.dart';
 
 class SplashView extends GetView<SplashController> {
   SplashView({Key? key}) : super(key: key);
-  // SplashController splashController = Get.put(SplashController());
+  SplashController splashController = Get.put(SplashController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(

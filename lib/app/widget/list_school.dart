@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ListSchool extends StatelessWidget {
   final String title;
@@ -12,35 +11,41 @@ class ListSchool extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(40),
-        side: const BorderSide(
-          color: Colors.black,
-          width: 1.5,
-        ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1), // Warna bayangan
+            blurRadius: 10, // Radius blur bayangan
+            offset: Offset(0, 0), // Perpindahan bayangan
+          ),
+        ],
+        color: Colors.white,
       ),
-      child: ListTile(
-        contentPadding: const EdgeInsets.all(0),
-        title: Text(
-          title,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        leading: ClipRRect(
-          borderRadius: BorderRadius.circular(38),
-          child: SizedBox(
-            width: 80,
-            height: 180,
-            child: Image.asset(
-              imagePath,
-              width: 90,
-              height: 90,
-              fit: BoxFit.fill,
-            ),
+      child: Material(
+        borderRadius: BorderRadius.circular(20),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(20),
+          onTap: onTap,
+          child: Row(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(imagePath), fit: BoxFit.fill)),
+              ),
+              Text(
+                title,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
           ),
         ),
-        onTap: onTap,
       ),
     );
   }

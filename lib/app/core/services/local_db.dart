@@ -8,13 +8,13 @@ class LocalDb {
   }
 
   static bool get repeat => _prefs.getBool('repeat') ?? false;
-  static bool get loggedIn => _prefs.getBool('logged_in') ?? false;
-  static bool get loggedInClient => _prefs.getBool('logged_in_client') ?? false;
+  static bool get loggedAdmin => _prefs.getBool('logged_in') ?? false;
+  static bool get loggedClient => _prefs.getBool('logged_in_client') ?? false;
   static String get fcmToken => _prefs.getString('fcm_token') ?? '';
   static set fcmToken(String token) => _prefs.setString('fcm_token', token);
 
   static set repeat(bool value) => _prefs.setBool('repeat', value);
-  static set loggedIn(bool value) => _prefs.setBool('logged_in', value);
-  static set loggedInClient(bool value) =>
+  static set loggedAdmin(bool value) => _prefs.setBool('logged_in', value);
+  static set loggedClient(bool value) =>
       _prefs.setBool('logged_in_client', value);
 }

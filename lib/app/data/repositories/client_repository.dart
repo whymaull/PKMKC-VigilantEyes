@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:vigilanteyes/app/core/utils/constants.dart';
-import 'package:vigilanteyes/app/entities/client_entity.dart';
+import 'package:vigilanteyes/app/data/entities/client_entity.dart';
 
 class ClientRepository {
   Future<List<ClientEntity>> listAll() async {
