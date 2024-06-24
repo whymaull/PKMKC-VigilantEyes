@@ -1,7 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
@@ -10,14 +8,21 @@ import 'package:vigilanteyes/app/widget/bullying_type_card.dart';
 
 import '../controllers/school_home_controller.dart';
 
-class SchoolHomeView extends GetView<SchoolHomeController> {
-  const SchoolHomeView({Key? key}) : super(key: key);
+class SchoolHomeView extends StatelessWidget {
+  SchoolHomeController controller = Get.put(SchoolHomeController());
+  SchoolHomeView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Vigi"),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        title: Obx(() => controller.isLoading.value
+            ? CircularProgressIndicator()
+            : Text("${controller.resultListSchool!.schoolname}")),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications),
@@ -48,7 +53,7 @@ class SchoolHomeView extends GetView<SchoolHomeController> {
                   ),
                 ],
               ),
-              PieChartSample3(),
+              Obx(() => PieChartSample3()),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -96,17 +101,21 @@ class SchoolHomeView extends GetView<SchoolHomeController> {
               ),
               const SizedBox(height: 20),
               const SizedBox(height: 10),
-              GridView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: 4,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, crossAxisSpacing: 10),
-                itemBuilder: (context, index) => bullyingCard(
-                  title: 'Penindasan Fisik',
-                  color: Colors.green,
-                ),
-              )
+              // GridView.count(
+              //   crossAxisCount: 2,
+
+              //   shrinkWrap: true,
+              //   physics: NeverScrollableScrollPhysics(),
+              //   children: [
+              //     bullyingCard(
+              //       title: 'Penindasan Fisik',
+              //       color: Colors.green,
+              //     ),
+              //   ],
+              //   // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //   //     crossAxisCount: 2, crossAxisSpacing: 10),
+              //   // itemBuilder: (context, index) =>
+              // )
             ],
           ),
         ),
@@ -116,7 +125,7 @@ class SchoolHomeView extends GetView<SchoolHomeController> {
 }
 
 class PieChartSample3 extends StatefulWidget {
-  const PieChartSample3({super.key});
+  PieChartSample3({super.key});
 
   @override
   State<StatefulWidget> createState() => PieChartSample3State();

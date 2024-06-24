@@ -3,8 +3,9 @@ import 'package:flutter/widgets.dart';
 
 class ShowDialogCard extends StatelessWidget {
   final Function()? onTap;
+  TextEditingController? controller;
 
-  const ShowDialogCard({super.key, this.onTap});
+  ShowDialogCard({super.key, this.onTap, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,9 @@ class ShowDialogCard extends StatelessWidget {
       ],
       title: const Text('Masukan Kata Sandi'),
       contentPadding: const EdgeInsets.all(16),
-      content: TextField(),
+      content: TextFormField(
+        controller: controller,
+      ),
     );
   }
 }

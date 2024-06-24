@@ -78,7 +78,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SCHOOL_HOME,
-      page: () => const SchoolHomeView(),
+      page: () => SchoolHomeView(),
       binding: SchoolHomeBinding(),
     ),
     GetPage(

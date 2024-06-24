@@ -72,14 +72,12 @@ class HomeView extends GetView<HomeController> {
                                       showDialog(
                                         context: context,
                                         builder: (context) => ShowDialogCard(
-                                          onTap: () {
-                                            // if (resultSchool.password) {
-
-                                            // } else {
-
-                                            // }
-                                            Get.toNamed(
-                                                Routes.DASHBOARD_SCHOOL);
+                                          controller: controller.nameController,
+                                          onTap: () async {
+                                            controller.checkPasswordBtn(
+                                                resultSchool.password,
+                                                controller.nameController.text,
+                                                resultSchool.schoolid);
                                           },
                                         ),
                                       );

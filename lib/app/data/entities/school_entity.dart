@@ -12,16 +12,16 @@ class SchoolEntity {
   });
 
   factory SchoolEntity.fromJson(Map<String, dynamic> json) => SchoolEntity(
-        schoolid: json["schoolid"],
+        schoolid: json["school_id"],
         createdAt: DateTime.parse(json["created_at"]),
-        schoolname: json["schoolname"],
+        schoolname: json["school_name"],
         password: json["password"],
       );
 
   Map<String, dynamic> toJson() => {
-        "schoolid": schoolid,
+        "school_id": schoolid,
         "created_at": createdAt.toIso8601String(),
-        "schoolname": schoolname,
+        "school_name": schoolname,
         "password": password,
       };
 }
