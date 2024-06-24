@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:vigilanteyes/app/data/entities/school_entity.dart';
 import 'package:vigilanteyes/app/data/repositories/school_repository.dart';
 

@@ -53,7 +53,7 @@ class SchoolHomeView extends StatelessWidget {
                   ),
                 ],
               ),
-              Obx(() => PieChartSample3()),
+              PieChartSample3(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -101,21 +101,36 @@ class SchoolHomeView extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               const SizedBox(height: 10),
-              // GridView.count(
-              //   crossAxisCount: 2,
-
-              //   shrinkWrap: true,
-              //   physics: NeverScrollableScrollPhysics(),
-              //   children: [
-              //     bullyingCard(
-              //       title: 'Penindasan Fisik',
-              //       color: Colors.green,
-              //     ),
-              //   ],
-              //   // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              //   //     crossAxisCount: 2, crossAxisSpacing: 10),
-              //   // itemBuilder: (context, index) =>
-              // )
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      bullyingCard(
+                        title: 'Penindasan Fisik',
+                        color: Colors.green,
+                      ),
+                      bullyingCard(
+                        title: 'Penindasan Fisik',
+                        color: Colors.green,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      bullyingCard(
+                        title: 'Penindasan Fisik',
+                        color: Colors.green,
+                      ),
+                      bullyingCard(
+                        title: 'Penindasan Fisik',
+                        color: Colors.green,
+                      ),
+                    ],
+                  )
+                ],
+              )
             ],
           ),
         ),

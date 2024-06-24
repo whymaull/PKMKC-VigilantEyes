@@ -17,14 +17,18 @@ class SplashController extends GetxController {
 
 void _onInit() {
   Future.delayed(const Duration(seconds: 3), () {
-    if (LocalDb.repeat) {
-      if (LocalDb.loggedAdmin) {
-        Get.offAllNamed(Routes.HOME);
+    if (LocalDb.idSchool == '') {
+      if (LocalDb.repeat) {
+        if (LocalDb.loggedAdmin) {
+          Get.offAllNamed(Routes.HOME);
+        } else {
+          Get.offAllNamed(Routes.DASHBOARD_SCHOOL);
+        }
       } else {
-        Get.offAllNamed(Routes.DASHBOARD_SCHOOL);
+        Get.offAllNamed(Routes.LOGIN);
       }
     } else {
-      Get.offAllNamed(Routes.LOGIN);
+      Get.offAllNamed(Routes.DASHBOARD_SCHOOL);
     }
   });
 }

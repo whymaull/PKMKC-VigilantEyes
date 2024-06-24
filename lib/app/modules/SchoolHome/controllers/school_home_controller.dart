@@ -6,7 +6,6 @@ import 'package:vigilanteyes/app/data/repositories/incident_repository.dart';
 import 'package:vigilanteyes/app/data/repositories/school_repository.dart';
 
 class SchoolHomeController extends GetxController {
-  //TODO: Implement SchoolHomeController
   RxBool isLoading = false.obs;
   RxBool isIncidentLoading = false.obs;
   SchoolEntity? resultListSchool;
@@ -16,7 +15,7 @@ class SchoolHomeController extends GetxController {
   @override
   void onInit() {
     getListSchool(int.parse(LocalDb.idSchool));
-    getIncedentById(LocalDb.idSchool);
+    // getIncedentById(LocalDb.idSchool);
     super.onInit();
   }
 
@@ -39,12 +38,12 @@ class SchoolHomeController extends GetxController {
     isLoading.value = false;
   }
 
-  getIncedentById(String id) async {
-    isIncidentLoading.value = true;
-    final incident = IncidentRepository();
-    resultListIncident = await incident.listAll(id);
-    isIncidentLoading.value = false;
-  }
+  // getIncedentById(String id) async {
+  //   isIncidentLoading.value = true;
+  //   final incident = IncidentRepository();
+  //   resultListIncident = await incident.listAll(id);
+  //   isIncidentLoading.value = false;
+  // }
   //   getIncedentById(String id) async {
   //   isIncidentLoading.value = true;
   //   final incident = IncidentRepository();
@@ -52,12 +51,12 @@ class SchoolHomeController extends GetxController {
   //   isIncidentLoading.value = false;
   // }
 
-  getIncedentByIdschoolNIdBulliying(
-      {required String idSchool, required String idBull}) async {
-    isIncidentLoading.value = true;
-    final incident = IncidentRepository();
-    resultListIncidentIdSchoolAndIdBull = await incident.listAllTypeBullnById(
-        idSchool: idSchool, idBullying: idBull);
-    isIncidentLoading.value = false;
-  }
+  // getIncedentByIdschoolNIdBulliying(
+  //     {required String idSchool, required String idBull}) async {
+  //   isIncidentLoading.value = true;
+  //   final incident = IncidentRepository();
+  //   resultListIncidentIdSchoolAndIdBull = await incident.listAllTypeBullnById(
+  //       idSchool: idSchool, idBullying: idBull);
+  //   isIncidentLoading.value = false;
+  // }
 }
