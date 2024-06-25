@@ -38,8 +38,12 @@ class ProfileView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("50"),
-                        Text("Kejadian"),
+                        Column(
+                          children: [
+                            Text("50"),
+                            Text("Kejadian"),
+                          ],
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -107,6 +111,8 @@ class ProfileView extends StatelessWidget {
                               SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2, crossAxisSpacing: 10),
                           itemBuilder: (context, index) => bullyingCard(
+                            persenIcident: '',
+                            sumIcident: "1",
                             title: 'Penindasan Fisik',
                             color: Colors.green,
                           ),

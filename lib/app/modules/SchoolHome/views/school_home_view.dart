@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:vigilanteyes/app/core/services/local_db.dart';
 import 'package:vigilanteyes/app/core/utils/colors.dart';
+import 'package:vigilanteyes/app/routes/app_pages.dart';
 import 'package:vigilanteyes/app/widget/bullying_type_card.dart';
 
 import '../controllers/school_home_controller.dart';
@@ -27,6 +29,13 @@ class SchoolHomeView extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.notifications),
             onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              LocalDb.idSchool == '';
+              Get.offAllNamed(Routes.HOME);
+            },
           ),
         ],
       ),
@@ -53,84 +62,98 @@ class SchoolHomeView extends StatelessWidget {
                   ),
                 ],
               ),
-              PieChartSample3(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        height: 20,
-                        width: 20,
-                        color: Colors.green,
+              Obx(() => controller.isIncidentLoading.value
+                  ? Container(
+                      child: Center(
+                        child: CircularProgressIndicator(),
                       ),
-                      Text("Fisik"),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        height: 20,
-                        width: 20,
-                        color: Colors.green,
-                      ),
-                      Text("Fisik"),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        height: 20,
-                        width: 20,
-                        color: Colors.green,
-                      ),
-                      Text("Fisik"),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        height: 20,
-                        width: 20,
-                        color: Colors.green,
-                      ),
-                      Text("Fisik"),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              const SizedBox(height: 10),
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      bullyingCard(
-                        title: 'Penindasan Fisik',
-                        color: Colors.green,
-                      ),
-                      bullyingCard(
-                        title: 'Penindasan Fisik',
-                        color: Colors.green,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      bullyingCard(
-                        title: 'Penindasan Fisik',
-                        color: Colors.green,
-                      ),
-                      bullyingCard(
-                        title: 'Penindasan Fisik',
-                        color: Colors.green,
-                      ),
-                    ],
-                  )
-                ],
-              )
+                    )
+                  : Column(
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        controller.getPersen1() == 0 &&
+                                controller.getPersen2() == 0 &&
+                                controller.getPersen3() == 0 &&
+                                controller.getPersen4() == 0
+                            ? Container(
+                                height: 200,
+                                width: 200,
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 95, 128, 149),
+                                  borderRadius: BorderRadius.circular(200),
+                                ),
+                                child: Center(
+                                    child: Text(
+                                  "Tidak Ada Kasus",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                )),
+                              )
+                            : PieChartSample3(
+                                valuePersen1: controller.getPersen1(),
+                                valuePersen2: controller.getPersen2(),
+                                valuePersen3: controller.getPersen3(),
+                                valuePersen4: controller.getPersen4(),
+                              ),
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            bullyingCard(
+                                persenIcident:
+                                    "${controller.getPersen1().toStringAsFixed(2)}",
+                                title: 'Penindasan Fisik',
+                                color: AppColors.contentColorBlue,
+                                sumIcident: controller
+                                        .resultListIncidentIdSchoolAndIdBull1
+                                        ?.length
+                                        .toStringAsFixed(0) ??
+                                    "0"),
+                            bullyingCard(
+                              persenIcident:
+                                  "${controller.getPersen2().toStringAsFixed(2)}",
+                              title: 'Penindasan Verbal',
+                              color: AppColors.contentColorYellow,
+                              sumIcident: controller
+                                      .resultListIncidentIdSchoolAndIdBull2
+                                      ?.length
+                                      .toStringAsFixed(0) ??
+                                  "0",
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            bullyingCard(
+                              persenIcident:
+                                  "${controller.getPersen3().toStringAsFixed(2)}",
+                              title: 'Penindasan Non Verbal',
+                              color: AppColors.contentColorPurple,
+                              sumIcident: controller
+                                      .resultListIncidentIdSchoolAndIdBull3
+                                      ?.length
+                                      .toStringAsFixed(0) ??
+                                  "0",
+                            ),
+                            bullyingCard(
+                              persenIcident:
+                                  "${controller.getPersen4().toStringAsFixed(2)}",
+                              title: 'Penindasan Sexsual',
+                              color: AppColors.contentColorGreen,
+                              sumIcident: controller
+                                      .resultListIncidentIdSchoolAndIdBull4
+                                      ?.length
+                                      .toStringAsFixed(0) ??
+                                  "0",
+                            ),
+                          ],
+                        )
+                      ],
+                    ))
             ],
           ),
         ),
@@ -140,13 +163,23 @@ class SchoolHomeView extends StatelessWidget {
 }
 
 class PieChartSample3 extends StatefulWidget {
-  PieChartSample3({super.key});
+  final double valuePersen1;
+  final double valuePersen2;
+  final double valuePersen3;
+  final double valuePersen4;
+  PieChartSample3({
+    super.key,
+    required this.valuePersen1,
+    required this.valuePersen2,
+    required this.valuePersen3,
+    required this.valuePersen4,
+  });
 
   @override
   State<StatefulWidget> createState() => PieChartSample3State();
 }
 
-class PieChartSample3State extends State {
+class PieChartSample3State extends State<PieChartSample3> {
   int touchedIndex = 0;
 
   @override
@@ -176,27 +209,36 @@ class PieChartSample3State extends State {
             ),
             sectionsSpace: 0,
             centerSpaceRadius: 0,
-            sections: showingSections(),
+            sections: showingSections(
+                valuePersen1: widget.valuePersen1,
+                valuePersen2: widget.valuePersen2,
+                valuePersen3: widget.valuePersen3,
+                valuePersen4: widget.valuePersen4),
           ),
         ),
       ),
     );
   }
 
-  List<PieChartSectionData> showingSections() {
+  List<PieChartSectionData> showingSections(
+      {required double valuePersen1,
+      required double valuePersen2,
+      required double valuePersen3,
+      required double valuePersen4}) {
     return List.generate(4, (i) {
       final isTouched = i == touchedIndex;
       final fontSize = isTouched ? 20.0 : 16.0;
       final radius = isTouched ? 110.0 : 100.0;
       final widgetSize = isTouched ? 55.0 : 40.0;
+
       const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
 
       switch (i) {
         case 0:
           return PieChartSectionData(
             color: AppColors.contentColorBlue,
-            value: 40,
-            title: '40%',
+            value: valuePersen1,
+            title: '${valuePersen1.toStringAsFixed(2)}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
@@ -214,8 +256,8 @@ class PieChartSample3State extends State {
         case 1:
           return PieChartSectionData(
             color: AppColors.contentColorYellow,
-            value: 30,
-            title: '30%',
+            value: valuePersen2,
+            title: '${valuePersen2.toStringAsFixed(2)}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
@@ -233,8 +275,8 @@ class PieChartSample3State extends State {
         case 2:
           return PieChartSectionData(
             color: AppColors.contentColorPurple,
-            value: 16,
-            title: '16%',
+            value: valuePersen3,
+            title: '${valuePersen3.toStringAsFixed(2)}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
@@ -249,11 +291,12 @@ class PieChartSample3State extends State {
             ),
             badgePositionPercentageOffset: .98,
           );
+
         case 3:
           return PieChartSectionData(
             color: AppColors.contentColorGreen,
-            value: 15,
-            title: '15%',
+            value: valuePersen4,
+            title: '${valuePersen4.toStringAsFixed(2)}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,

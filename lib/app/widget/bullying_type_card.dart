@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 
 class bullyingCard extends StatelessWidget {
   final String title;
+  final String sumIcident;
+  final String persenIcident;
   final Color color;
 
   const bullyingCard({
     Key? key,
     required this.title,
     required this.color,
+    required this.sumIcident,
+    required this.persenIcident,
   }) : super(key: key);
 
   @override
@@ -26,21 +30,47 @@ class bullyingCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                  color: Colors.white),
             ),
             Text(
-              '25',
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+              sumIcident,
+              style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
             Row(
               children: [
-                Text("38.89%"),
+                Container(
+                  padding: EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(80, 255, 255, 255),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        "$persenIcident %",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                    ],
+                  ),
+                ),
                 SizedBox(
-                  width: 10,
+                  width: 5,
                 ),
                 Text(
                   'Sebulan Terakhir',
-                  style: TextStyle(fontSize: 10),
+                  style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
                 )
               ],
             )

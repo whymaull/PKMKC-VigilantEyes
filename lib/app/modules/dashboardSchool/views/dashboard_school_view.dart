@@ -23,7 +23,7 @@ class DashboardSchoolView extends GetView<DashboardSchoolController> {
                 SchoolHomeView(),
                 SchoolCCTVView(),
                 RecentView(),
-                ProfileView(),
+                // ProfileView(),
               ],
             ),
           ),
