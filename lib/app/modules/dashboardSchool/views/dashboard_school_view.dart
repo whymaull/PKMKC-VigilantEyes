@@ -23,7 +23,7 @@ class DashboardSchoolView extends GetView<DashboardSchoolController> {
                 SchoolHomeView(),
                 SchoolCCTVView(),
                 RecentView(),
-                // ProfileView(),
+                ProfileView(),
               ],
             ),
           ),
@@ -36,7 +36,6 @@ class DashboardSchoolView extends GetView<DashboardSchoolController> {
   buildBottomNavBar(DashboardSchoolController controller) {
     return BottomNavigationBar(
       selectedItemColor: Colors.blue,
-      unselectedItemColor: Colors.grey,
       showSelectedLabels: false,
       showUnselectedLabels: false,
       onTap: controller.changeTabIndex,

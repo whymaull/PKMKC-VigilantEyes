@@ -14,6 +14,8 @@ abstract class Routes {
   static const NOTIFIKASI = _Paths.NOTIFIKASI;
   static const SCHOOL_HOME = _Paths.SCHOOL_HOME;
   static const PROFILE = _Paths.PROFILE;
+  static const CLASS_DETAIL = _Paths.CLASS_DETAIL;
+  static const DETAILPENINDASAN = _Paths.DETAILPENINDASAN;
 }
 
 abstract class _Paths {
@@ -29,4 +31,6 @@ abstract class _Paths {
   static const NOTIFIKASI = '/notifikasi';
   static const SCHOOL_HOME = '/school-home';
   static const PROFILE = '/profile';
+  static const CLASS_DETAIL = '/class-detail';
+  static const DETAILPENINDASAN = '/detailpenindasan';
 }

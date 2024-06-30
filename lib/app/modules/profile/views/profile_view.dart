@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:vigilanteyes/app/controllers/authcontroller_controller.dart';
+import 'package:vigilanteyes/app/core/utils/colors.dart';
+import 'package:vigilanteyes/app/modules/SchoolHome/controllers/school_home_controller.dart';
+import 'package:vigilanteyes/app/routes/app_pages.dart';
 import 'package:vigilanteyes/app/widget/bullying_type_card.dart';
 
 import '../controllers/profile_controller.dart';
@@ -9,6 +12,7 @@ import '../controllers/profile_controller.dart';
 class ProfileView extends StatelessWidget {
   final AuthController _controller = Get.put(AuthController());
   final ProfileController controller = Get.put(ProfileController());
+  SchoolHomeController controllerSC = Get.put(SchoolHomeController());
 
   ProfileView({Key? key}) : super(key: key);
   @override
@@ -103,20 +107,77 @@ class ProfileView extends StatelessWidget {
                           ],
                         ),
                         Text("Kejadian"),
-                        GridView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: 4,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2, crossAxisSpacing: 10),
-                          itemBuilder: (context, index) => bullyingCard(
-                            persenIcident: '',
-                            sumIcident: "1",
-                            title: 'Penindasan Fisik',
-                            color: Colors.green,
-                          ),
-                        )
+                        controllerSC.isIncidentLoading.value
+                            ? CircularProgressIndicator()
+                            : GridView.count(
+                                crossAxisCount: 2,
+                                shrinkWrap: true,
+                                mainAxisSpacing: 5,
+                                crossAxisSpacing: 10,
+                                physics: NeverScrollableScrollPhysics(),
+                                children: [
+                                  bullyingCard(
+                                    persenIcident:
+                                        "${controllerSC.getPersen1().toStringAsFixed(2)}",
+                                    title: 'Penindasan FIsik',
+                                    color: AppColors.contentColorBlue,
+                                    sumIcident: controllerSC
+                                            .resultListIncidentIdSchoolAndIdBull1
+                                            ?.length
+                                            .toStringAsFixed(0) ??
+                                        "0",
+                                    onTap: () {
+                                      Get.toNamed(Routes.DETAILPENINDASAN,
+                                          arguments: 1);
+                                    },
+                                  ),
+                                  bullyingCard(
+                                    persenIcident:
+                                        "${controllerSC.getPersen2().toStringAsFixed(2)}",
+                                    title: 'Penindasan Verbal',
+                                    color: AppColors.contentColorYellow,
+                                    sumIcident: controllerSC
+                                            .resultListIncidentIdSchoolAndIdBull2
+                                            ?.length
+                                            .toStringAsFixed(0) ??
+                                        "0",
+                                    onTap: () {
+                                      Get.toNamed(Routes.DETAILPENINDASAN,
+                                          arguments: 2);
+                                    },
+                                  ),
+                                  bullyingCard(
+                                    persenIcident:
+                                        "${controllerSC.getPersen3().toStringAsFixed(2)}",
+                                    title: 'Penindasan Non Verbal',
+                                    color: AppColors.contentColorPurple,
+                                    sumIcident: controllerSC
+                                            .resultListIncidentIdSchoolAndIdBull3
+                                            ?.length
+                                            .toStringAsFixed(0) ??
+                                        "0",
+                                    onTap: () {
+                                      Get.toNamed(Routes.DETAILPENINDASAN,
+                                          arguments: 3);
+                                    },
+                                  ),
+                                  bullyingCard(
+                                    persenIcident:
+                                        "${controllerSC.getPersen4().toStringAsFixed(2)}",
+                                    title: 'Penindasan Sexsual',
+                                    color: AppColors.contentColorGreen,
+                                    sumIcident: controllerSC
+                                            .resultListIncidentIdSchoolAndIdBull4
+                                            ?.length
+                                            .toStringAsFixed(0) ??
+                                        "0",
+                                    onTap: () {
+                                      Get.toNamed(Routes.DETAILPENINDASAN,
+                                          arguments: 4);
+                                    },
+                                  ),
+                                ],
+                              ),
                       ],
                     ),
                   ),

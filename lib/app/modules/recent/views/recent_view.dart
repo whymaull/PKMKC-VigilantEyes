@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:vigilanteyes/app/core/utils/helpers.dart';
 import 'package:vigilanteyes/app/widget/input_field.dart';
 import 'package:vigilanteyes/app/widget/recent_bullying_card.dart';
 
 import '../controllers/recent_controller.dart';
 
-class RecentView extends GetView<RecentController> {
-  const RecentView({Key? key}) : super(key: key);
+class RecentView extends StatelessWidget {
+  RecentController controller = Get.put(RecentController());
+
+  RecentView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +31,7 @@ class RecentView extends GetView<RecentController> {
             child: Row(
               children: [
                 const Text(
-                  'Recent bullying',
+                  'Riwayat Kejadian',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -48,31 +52,42 @@ class RecentView extends GetView<RecentController> {
             ),
           ),
           Expanded(
-            child: ListView(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-              children: [
-                recentBullying(
-                    imagePath: 'assets/logo.png',
-                    className: 'Class VII',
-                    type: 'Verbal bullying',
-                    date: '12 Januari 2024'),
-                recentBullying(
-                    imagePath: 'assets/logo.png',
-                    className: 'Class III',
-                    type: 'Verbal bullying',
-                    date: '05 Januari 2024'),
-                recentBullying(
-                    imagePath: 'assets/logo.png',
-                    className: 'Class IV',
-                    type: 'Physical bullying',
-                    date: '20 Desember 2023'),
-                recentBullying(
-                    imagePath: 'assets/logo.png',
-                    className: 'Class V',
-                    type: 'Verbal bullying',
-                    date: '15 Desember 2023'),
-              ],
-            ),
+            child: Obx(() => controller.isLoading.value
+                ? CircularProgressIndicator()
+                : controller.resultListIncident?.length == 0
+                    ? Text("Data Kosong")
+                    : ListView.builder(
+                        itemCount: controller.resultListIncident?.length,
+                        itemBuilder: (context, index) {
+                          final result = controller.resultListIncident?[index];
+                          String incident = "Penidasan Fisik";
+
+                          // switch (result?.idIncidents) {
+                          //   case 1:
+                          //     incident = "Penidasan Fisik";
+                          //     break;
+                          //   case 2:
+                          //     incident = "Penidasan Verbal";
+
+                          //     break;
+                          //   case 3:
+                          //     incident = "Penidasan Non-Verbal";
+                          //     break;
+                          //   case 4:
+                          //     incident = "Penidasan Sexsual";
+
+                          //     break;
+                          //   default:
+                          //     incident = "Penindasan Fisik";
+                          // }
+                          return recentBullying(
+                              imagePath: '${result?.imageVideo}',
+                              className: '${result?.kelas}',
+                              type: "${catagoryBull(result!.idIncidents)}",
+                              date:
+                                  '${DateFormat('yyyy-MM-dd HH:mm:ss').format(result!.createdAt)}');
+                        },
+                      )),
           ),
         ],
       ),

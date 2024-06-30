@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 class IncidentRepository {
   final tableName = "incidents";
   Future<List<IncidentEntity>> listAll(String id) async {
-    var url = Uri.parse('$baseUrl/$tableName?select=*');
+    var url = Uri.parse('$baseUrl/$tableName?select=*&id_school=eq.$id');
     var headers = {'apikey': apiKey, 'Authorization': 'Bearer $apiKey'};
     final response = await http.get(url, headers: headers);
 
@@ -31,6 +31,18 @@ class IncidentRepository {
       {required String idSchool, required String idBullying}) async {
     var url = Uri.parse(
         '$baseUrl/$tableName?select=*&id_school=eq.$idSchool&type_bullying=eq.$idBullying');
+    var headers = {'apikey': apiKey, 'Authorization': 'Bearer $apiKey'};
+    final response = await http.get(url, headers: headers);
+
+    return (jsonDecode(response.body) as List)
+        .map((e) => IncidentEntity?.fromJson(e))
+        .toList();
+  }
+
+  Future<List<IncidentEntity>> listAllIdSchoollIdCCTV(
+      {required String idSchool, required String idCCTV}) async {
+    var url = Uri.parse(
+        '$baseUrl/$tableName?select=*&id_school=eq.$idSchool&id_cctv=eq.$idCCTV');
     var headers = {'apikey': apiKey, 'Authorization': 'Bearer $apiKey'};
     final response = await http.get(url, headers: headers);
 

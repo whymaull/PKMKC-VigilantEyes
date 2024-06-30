@@ -9,6 +9,13 @@ class SchoolHomeController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isIncidentLoading = true.obs;
   SchoolEntity? resultListSchool;
+  var selectedFilter = 'Hari ini'.obs;
+  final List<String> filters = [
+    'Hari ini',
+    'Seminggu',
+    'Sebulan',
+    'Tahun',
+  ];
   List<IncidentEntity>? resultListIncident;
   List<IncidentEntity>? resultListIncidentIdSchoolAndIdBull1;
   List<IncidentEntity>? resultListIncidentIdSchoolAndIdBull2;
@@ -28,6 +35,10 @@ class SchoolHomeController extends GetxController {
     final schoolRepo = SchoolRepository();
     resultListSchool = await schoolRepo.findById(id);
     isLoading.value = false;
+  }
+
+  void applyFilter(String filter) {
+    selectedFilter.value = filter;
   }
 
   getIncedentByIdAll(String id) async {

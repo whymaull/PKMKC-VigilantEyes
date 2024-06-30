@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
+import 'package:vigilanteyes/app/routes/app_pages.dart';
 import 'package:vigilanteyes/app/widget/list_school.dart';
 
 import '../controllers/school_cctv_controller.dart';
 
-class SchoolCCTVView extends GetView<SchoolCCTVController> {
-  const SchoolCCTVView({Key? key}) : super(key: key);
+class SchoolCCTVView extends StatelessWidget {
+  SchoolCCTVController controller = Get.put(SchoolCCTVController());
+
+  SchoolCCTVView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,17 +40,28 @@ class SchoolCCTVView extends GetView<SchoolCCTVController> {
               const Padding(
                 padding: EdgeInsets.only(top: 4, bottom: 16),
               ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return ListSchool(
-                      title: 'CCTV Kelas 10',
-                      imagePath: 'assets/logo.png',
-                    );
-                  },
-                ),
-              )
+              Obx(() => controller.isLoading.value
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Expanded(
+                      child: ListView.builder(
+                        itemCount: controller.resultKelasSchool?.length,
+                        itemBuilder: (context, index) {
+                          final resultClass =
+                              controller.resultKelasSchool?[index];
+                          return ListSchool(
+                            title: "${resultClass?.lokasiCctv}",
+                            imagePath: 'assets/logo.png',
+                            onTap: () {
+                              Get.toNamed(Routes.CLASS_DETAIL,
+                                  arguments: resultClass?.idCctv);
+                            },
+                          );
+                        },
+                      ),
+                    ))
+
               // Expanded(
               //   child: ListView(
               //     children: [

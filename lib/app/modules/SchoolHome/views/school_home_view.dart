@@ -1,5 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
@@ -39,123 +41,151 @@ class SchoolHomeView extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text("Cari Berdasarkan Bulan"),
-                  ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.filter_list),
-                    label: const Text('Filter'),
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Obx(() => controller.isIncidentLoading.value
-                  ? Container(
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    )
-                  : Column(
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        controller.getPersen1() == 0 &&
-                                controller.getPersen2() == 0 &&
-                                controller.getPersen3() == 0 &&
-                                controller.getPersen4() == 0
-                            ? Container(
-                                height: 200,
-                                width: 200,
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 95, 128, 149),
-                                  borderRadius: BorderRadius.circular(200),
-                                ),
-                                child: Center(
-                                    child: Text(
-                                  "Tidak Ada Kasus",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                )),
-                              )
-                            : PieChartSample3(
-                                valuePersen1: controller.getPersen1(),
-                                valuePersen2: controller.getPersen2(),
-                                valuePersen3: controller.getPersen3(),
-                                valuePersen4: controller.getPersen4(),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Obx(() => DropdownButton<String>(
+                      value: controller.selectedFilter.value,
+                      icon: const Icon(Icons.filter_list),
+                      onChanged: (String? newValue) {
+                        if (newValue != null) {
+                          controller.applyFilter(newValue);
+                        }
+                      },
+                      items: controller.filters
+                          .map<DropdownMenuItem<String>>((String filter) {
+                        return DropdownMenuItem<String>(
+                          value: filter,
+                          child: Text(filter),
+                        );
+                      }).toList(),
+                    )),
+              ],
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Obx(() => controller.isIncidentLoading.value
+                        ? Container(
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          )
+                        : Column(
+                            children: [
+                              SizedBox(
+                                height: 10,
                               ),
-                        const SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            bullyingCard(
-                                persenIcident:
-                                    "${controller.getPersen1().toStringAsFixed(2)}",
-                                title: 'Penindasan Fisik',
-                                color: AppColors.contentColorBlue,
-                                sumIcident: controller
-                                        .resultListIncidentIdSchoolAndIdBull1
-                                        ?.length
-                                        .toStringAsFixed(0) ??
-                                    "0"),
-                            bullyingCard(
-                              persenIcident:
-                                  "${controller.getPersen2().toStringAsFixed(2)}",
-                              title: 'Penindasan Verbal',
-                              color: AppColors.contentColorYellow,
-                              sumIcident: controller
-                                      .resultListIncidentIdSchoolAndIdBull2
-                                      ?.length
-                                      .toStringAsFixed(0) ??
-                                  "0",
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            bullyingCard(
-                              persenIcident:
-                                  "${controller.getPersen3().toStringAsFixed(2)}",
-                              title: 'Penindasan Non Verbal',
-                              color: AppColors.contentColorPurple,
-                              sumIcident: controller
-                                      .resultListIncidentIdSchoolAndIdBull3
-                                      ?.length
-                                      .toStringAsFixed(0) ??
-                                  "0",
-                            ),
-                            bullyingCard(
-                              persenIcident:
-                                  "${controller.getPersen4().toStringAsFixed(2)}",
-                              title: 'Penindasan Sexsual',
-                              color: AppColors.contentColorGreen,
-                              sumIcident: controller
-                                      .resultListIncidentIdSchoolAndIdBull4
-                                      ?.length
-                                      .toStringAsFixed(0) ??
-                                  "0",
-                            ),
-                          ],
-                        )
-                      ],
-                    ))
-            ],
-          ),
+                              controller.getPersen1() == 0 &&
+                                      controller.getPersen2() == 0 &&
+                                      controller.getPersen3() == 0 &&
+                                      controller.getPersen4() == 0
+                                  ? Container(
+                                      height: 200,
+                                      width: 200,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(255, 95, 128, 149),
+                                        borderRadius:
+                                            BorderRadius.circular(200),
+                                      ),
+                                      child: Center(
+                                          child: Text(
+                                        "Tidak Ada Kasus",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
+                                      )),
+                                    )
+                                  : PieChartSample3(
+                                      valuePersen1: controller.getPersen1(),
+                                      valuePersen2: controller.getPersen2(),
+                                      valuePersen3: controller.getPersen3(),
+                                      valuePersen4: controller.getPersen4(),
+                                    ),
+                              const SizedBox(height: 20),
+                              GridView.count(
+                                crossAxisCount: 2,
+                                shrinkWrap: true,
+                                mainAxisSpacing: 5,
+                                crossAxisSpacing: 10,
+                                physics: NeverScrollableScrollPhysics(),
+                                children: [
+                                  bullyingCard(
+                                    persenIcident:
+                                        "${controller.getPersen1().toStringAsFixed(2)}",
+                                    title: 'Penindasan Fisik',
+                                    color: AppColors.contentColorBlue,
+                                    sumIcident: controller
+                                            .resultListIncidentIdSchoolAndIdBull1
+                                            ?.length
+                                            .toStringAsFixed(0) ??
+                                        "0",
+                                    onTap: () {
+                                      Get.toNamed(Routes.DETAILPENINDASAN,
+                                          arguments: 1);
+                                    },
+                                  ),
+                                  bullyingCard(
+                                    persenIcident:
+                                        "${controller.getPersen2().toStringAsFixed(2)}",
+                                    title: 'Penindasan Verbal',
+                                    color: AppColors.contentColorYellow,
+                                    sumIcident: controller
+                                            .resultListIncidentIdSchoolAndIdBull2
+                                            ?.length
+                                            .toStringAsFixed(0) ??
+                                        "0",
+                                    onTap: () {
+                                      Get.toNamed(Routes.DETAILPENINDASAN,
+                                          arguments: 2);
+                                    },
+                                  ),
+                                  bullyingCard(
+                                    persenIcident:
+                                        "${controller.getPersen3().toStringAsFixed(2)}",
+                                    title: 'Penindasan Non Verbal',
+                                    color: AppColors.contentColorPurple,
+                                    sumIcident: controller
+                                            .resultListIncidentIdSchoolAndIdBull3
+                                            ?.length
+                                            .toStringAsFixed(0) ??
+                                        "0",
+                                    onTap: () {
+                                      Get.toNamed(Routes.DETAILPENINDASAN,
+                                          arguments: 3);
+                                    },
+                                  ),
+                                  bullyingCard(
+                                    persenIcident:
+                                        "${controller.getPersen4().toStringAsFixed(2)}",
+                                    title: 'Penindasan Sexsual',
+                                    color: AppColors.contentColorGreen,
+                                    sumIcident: controller
+                                            .resultListIncidentIdSchoolAndIdBull4
+                                            ?.length
+                                            .toStringAsFixed(0) ??
+                                        "0",
+                                    onTap: () {
+                                      Get.toNamed(Routes.DETAILPENINDASAN,
+                                          arguments: 4);
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ))
+                  ],
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -185,9 +215,9 @@ class PieChartSample3State extends State<PieChartSample3> {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 1.3,
+      aspectRatio: 1.5,
       child: AspectRatio(
-        aspectRatio: 1,
+        aspectRatio: 1.5,
         child: PieChart(
           PieChartData(
             pieTouchData: PieTouchData(

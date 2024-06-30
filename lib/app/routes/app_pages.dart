@@ -2,10 +2,14 @@ import 'package:get/get.dart';
 
 import '../modules/SchoolHome/bindings/school_home_binding.dart';
 import '../modules/SchoolHome/views/school_home_view.dart';
+import '../modules/classdetail/bindings/class_detail_binding.dart';
+import '../modules/classdetail/views/class_detail_view.dart';
 import '../modules/daftar/bindings/daftar_binding.dart';
 import '../modules/daftar/views/daftar_view.dart';
 import '../modules/dashboardSchool/bindings/dashboard_school_binding.dart';
 import '../modules/dashboardSchool/views/dashboard_school_view.dart';
+import '../modules/detailpenindasan/bindings/detailpenindasan_binding.dart';
+import '../modules/detailpenindasan/views/detailpenindasan_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -63,12 +67,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SCHOOL_C_C_T_V,
-      page: () => const SchoolCCTVView(),
+      page: () => SchoolCCTVView(),
       binding: SchoolCCTVBinding(),
     ),
     GetPage(
       name: _Paths.RECENT,
-      page: () => const RecentView(),
+      page: () => RecentView(),
       binding: RecentBinding(),
     ),
     GetPage(
@@ -85,6 +89,16 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.CLASS_DETAIL,
+      page: () => const ClassDetailView(),
+      binding: ClassDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAILPENINDASAN,
+      page: () => const DetailpenindasanView(),
+      binding: DetailpenindasanBinding(),
     ),
   ];
 }

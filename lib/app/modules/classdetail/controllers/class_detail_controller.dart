@@ -4,22 +4,15 @@ import 'package:vigilanteyes/app/core/services/local_db.dart';
 import 'package:vigilanteyes/app/data/entities/incident_entity.dart';
 import 'package:vigilanteyes/app/data/repositories/incident_repository.dart';
 
-class RecentController extends GetxController {
-  //TODO: Implement RecentController
-
-  final count = 0.obs;
+class ClassDetailController extends GetxController {
+  List<IncidentEntity>? resultIncident;
   RxBool isLoading = false.obs;
-  List<IncidentEntity>? resultListIncident;
-  @override
-  void onInit() {
-    getIncedentByIdAll(LocalDb.idSchool);
-    super.onInit();
-  }
 
-  getIncedentByIdAll(String id) async {
+  getIncident(String idCCTV) async {
     isLoading.value = true;
     final incident = IncidentRepository();
-    resultListIncident = await incident.listAll(id);
+    resultIncident = await incident.listAllIdSchoollIdCCTV(
+        idSchool: LocalDb.idSchool, idCCTV: idCCTV);
     isLoading.value = false;
   }
 }

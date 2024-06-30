@@ -20,17 +20,26 @@ class recentBullying extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Card(
+        Container(
+          margin: EdgeInsets.only(right: 10, top: 10, left: 10, bottom: 5),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(0, 0),
+                  blurRadius: 10,
+                  color: Colors.black.withOpacity(0.1), // Warna bayangan
+                )
+              ]),
           child: ListTile(
-            leading: ClipRRect(
-              child: SizedBox(
-                child: Image.asset(
-                  imagePath,
-                  width: 90,
-                  height: 150,
-                  fit: BoxFit.fill,
-                ),
-              ),
+            leading: Container(
+              height: 90,
+              width: 150,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(imagePath), fit: BoxFit.fill),
+                  borderRadius: BorderRadius.circular(10)),
             ),
             title: Text(
               className,
@@ -46,7 +55,10 @@ class recentBullying extends StatelessWidget {
             onTap: klik,
           ),
         ),
-        const Divider(),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: const Divider(),
+        ),
       ],
     );
   }

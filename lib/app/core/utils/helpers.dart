@@ -133,3 +133,26 @@
 //   String fileName = path.basename(filePath);
 //   return fileName;
 // }
+
+String catagoryBull(int incidentId) {
+  String incident;
+  switch (incidentId) {
+    case 1:
+      incident = "Penidasan Fisik";
+      break;
+    case 2:
+      incident = "Penidasan Verbal";
+
+      break;
+    case 3:
+      incident = "Penidasan Non-Verbal";
+      break;
+    case 4:
+      incident = "Penidasan Sexsual";
+
+      break;
+    default:
+      incident = "Penindasan Fisik";
+  }
+  return incident;
+}
