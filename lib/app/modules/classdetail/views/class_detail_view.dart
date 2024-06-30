@@ -18,40 +18,42 @@ class ClassDetailView extends GetView<ClassDetailController> {
           centerTitle: true,
         ),
         body: Obx(() => controller.isLoading.value
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator(),
               )
-            : ListView.builder(
-                itemCount: controller.resultIncident?.length,
-                itemBuilder: (context, index) {
-                  final result = controller.resultIncident?[index];
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 150,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: NetworkImage(result!.imageVideo),
-                                  fit: BoxFit.fill),
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+            : controller.resultIncident!.isEmpty
+                ? const Text("Data Kosong")
+                : ListView.builder(
+                    itemCount: controller.resultIncident?.length,
+                    itemBuilder: (context, index) {
+                      final result = controller.resultIncident?[index];
+                      return Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
                           children: [
-                            Text("Penindasan Verbal"),
-                            Text("20 Juli 2024"),
-                            Text("10:00 WIB"),
+                            Container(
+                              height: 150,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: NetworkImage(result!.imageVideo),
+                                      fit: BoxFit.fill),
+                                  borderRadius: BorderRadius.circular(10)),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text("Penindasan Verbal"),
+                                Text("20 Juli 2024"),
+                                Text("10:00 WIB"),
+                              ],
+                            ),
+                            const Divider()
                           ],
                         ),
-                        Divider()
-                      ],
-                    ),
-                  );
-                })));
+                      );
+                    })));
   }
 }

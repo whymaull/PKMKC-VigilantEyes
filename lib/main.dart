@@ -13,14 +13,14 @@ void main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseApi().initNotifications();
-  FirebaseMessaging.onBackgroundMessage(HandleBackgroundMessage);
+  FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
 
   await LocalDb.init();
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "VigilantEyes",
-      initialRoute: AppPages.INITIAL,
+      initialRoute: AppPages.initial,
       getPages: AppPages.routes,
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white, // Set background color to white

@@ -1,9 +1,10 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:vigilanteyes/app/core/utils/helpers.dart';
-import 'package:vigilanteyes/app/widget/input_field.dart';
 import 'package:vigilanteyes/app/widget/recent_bullying_card.dart';
 
 import '../controllers/recent_controller.dart';
@@ -17,17 +18,36 @@ class RecentView extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Expanded(
-              child: InputTextField(
-                title: 'Search for bullying by class',
-                iconTextField: Icon(Icons.search),
+          const SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              margin: const EdgeInsets.only(top: 8),
+              child: TextField(
+                onChanged: (value) {
+                  controller.updateSearch(value);
+                  controller.searchClass(
+                      keyword: value, filter: controller.selectedFilter.value);
+                },
+                decoration: InputDecoration(
+                  hintText: 'Search CCTV by Class',
+                  hintStyle: const TextStyle(fontSize: 16),
+                  suffixIcon: const Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  contentPadding: const EdgeInsets.only(left: 24),
+                ),
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               children: [
                 const Text(
@@ -38,57 +58,47 @@ class RecentView extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.filter_list),
-                  label: const Text('Filter'),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                ),
+                Obx(() => DropdownButton<String>(
+                      value: controller.selectedFilter.value,
+                      icon: const Icon(Icons.filter_list),
+                      onChanged: (String? newValue) {
+                        if (newValue != null) {
+                          controller.searchClass(
+                            keyword: controller.valuee.value,
+                            filter: newValue,
+                          );
+                        }
+                      },
+                      items: controller.filters
+                          .map<DropdownMenuItem<String>>((String filter) {
+                        return DropdownMenuItem<String>(
+                          value: filter,
+                          child: Text(filter),
+                        );
+                      }).toList(),
+                    ))
               ],
             ),
           ),
-          Expanded(
-            child: Obx(() => controller.isLoading.value
-                ? CircularProgressIndicator()
-                : controller.resultListIncident?.length == 0
-                    ? Text("Data Kosong")
-                    : ListView.builder(
+          Obx(() => controller.isLoading.value
+              ? const SizedBox(
+                  height: 50, width: 50, child: CircularProgressIndicator())
+              : controller.resultListIncident!.isEmpty
+                  ? const Text("Data Kosong")
+                  : Expanded(
+                      child: ListView.builder(
                         itemCount: controller.resultListIncident?.length,
                         itemBuilder: (context, index) {
                           final result = controller.resultListIncident?[index];
-                          String incident = "Penidasan Fisik";
-
-                          // switch (result?.idIncidents) {
-                          //   case 1:
-                          //     incident = "Penidasan Fisik";
-                          //     break;
-                          //   case 2:
-                          //     incident = "Penidasan Verbal";
-
-                          //     break;
-                          //   case 3:
-                          //     incident = "Penidasan Non-Verbal";
-                          //     break;
-                          //   case 4:
-                          //     incident = "Penidasan Sexsual";
-
-                          //     break;
-                          //   default:
-                          //     incident = "Penindasan Fisik";
-                          // }
-                          return recentBullying(
+                          return RecentBullying(
                               imagePath: '${result?.imageVideo}',
                               className: '${result?.kelas}',
-                              type: "${catagoryBull(result!.idIncidents)}",
-                              date:
-                                  '${DateFormat('yyyy-MM-dd HH:mm:ss').format(result!.createdAt)}');
+                              type: catagoryBull(result!.idIncidents),
+                              date: DateFormat('yyyy-MM-dd HH:mm:ss')
+                                  .format(result.createdAt));
                         },
-                      )),
-          ),
+                      ),
+                    )),
         ],
       ),
     );

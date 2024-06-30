@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
-class bullyingCard extends StatelessWidget {
+class BullyingCard extends StatelessWidget {
   final String title;
   final String sumIcident;
   final String persenIcident;
+  final String ket;
   final Color color;
   final Function()? onTap;
 
-  const bullyingCard({
+  const BullyingCard({
     Key? key,
     required this.title,
     required this.color,
     required this.sumIcident,
+    required this.ket,
     required this.persenIcident,
     this.onTap,
   }) : super(key: key);
@@ -44,7 +46,7 @@ class bullyingCard extends StatelessWidget {
                 ),
                 Text(
                   sumIcident,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
@@ -52,29 +54,29 @@ class bullyingCard extends StatelessWidget {
                 Row(
                   children: [
                     Container(
-                      padding: EdgeInsets.all(2),
+                      padding: const EdgeInsets.all(2),
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(80, 255, 255, 255),
+                        color: const Color.fromARGB(80, 255, 255, 255),
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Column(
                         children: [
                           Text(
                             "$persenIcident %",
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Text(
-                      'Sebulan',
-                      style: TextStyle(
+                      ket,
+                      style: const TextStyle(
                           fontSize: 10,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),

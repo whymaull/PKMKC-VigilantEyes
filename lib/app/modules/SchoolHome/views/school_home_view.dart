@@ -1,12 +1,13 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:vigilanteyes/app/core/services/local_db.dart';
 import 'package:vigilanteyes/app/core/utils/colors.dart';
+import 'package:vigilanteyes/app/modules/profile/controllers/profile_controller.dart';
 import 'package:vigilanteyes/app/routes/app_pages.dart';
 import 'package:vigilanteyes/app/widget/bullying_type_card.dart';
 
@@ -14,6 +15,8 @@ import '../controllers/school_home_controller.dart';
 
 class SchoolHomeView extends StatelessWidget {
   SchoolHomeController controller = Get.put(SchoolHomeController());
+  final ProfileController controllerPC = Get.put(ProfileController());
+
   SchoolHomeView({
     Key? key,
   }) : super(key: key);
@@ -25,20 +28,65 @@ class SchoolHomeView extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.white,
         title: Obx(() => controller.isLoading.value
-            ? CircularProgressIndicator()
-            : Text("${controller.resultListSchool!.schoolname}")),
+            ? const CircularProgressIndicator()
+            : Text(controller.resultListSchool!.schoolname)),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              LocalDb.idSchool == '';
-              Get.offAllNamed(Routes.HOME);
+              Get.toNamed(Routes.NOTIFIKASI);
             },
           ),
+          Obx(() => controllerPC.isLoading.value
+              ? const Text("")
+              : controllerPC.resultUser!.email != "admin@gmail.com"
+                  ? const Text("")
+                  : IconButton(
+                      icon: const Icon(Icons.arrow_back),
+                      onPressed: () {
+                        Get.dialog<bool>(
+                          AlertDialog(
+                            title: const Text('Keluar'),
+                            content: const Text(
+                              'Ingin kembali ke Halaman List Sekolah?',
+                            ),
+                            actions: [
+                              Container(
+                                padding:
+                                    const EdgeInsets.only(left: 16, right: 16),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: const Color(0xff5CE1E6)),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: TextButton(
+                                  onPressed: () => Get.back(result: false),
+                                  child: const Text(
+                                    'Batal',
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding:
+                                    const EdgeInsets.only(left: 16, right: 16),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: const Color(0xff5CE1E6)),
+                                child: TextButton(
+                                  onPressed: () {
+                                    LocalDb.idSchool == '';
+                                    Get.offAllNamed(Routes.HOME);
+                                  },
+                                  child: const Text(
+                                    'Ya, Keluar',
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ))
         ],
       ),
       body: Padding(
@@ -72,14 +120,15 @@ class SchoolHomeView extends StatelessWidget {
                 child: Column(
                   children: [
                     Obx(() => controller.isIncidentLoading.value
-                        ? Container(
-                            child: Center(
+                        ? SizedBox(
+                            height: MediaQuery.of(context).size.height / 2,
+                            child: const Center(
                               child: CircularProgressIndicator(),
                             ),
                           )
                         : Column(
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               controller.getPersen1() == 0 &&
@@ -90,12 +139,12 @@ class SchoolHomeView extends StatelessWidget {
                                       height: 200,
                                       width: 200,
                                       decoration: BoxDecoration(
-                                        color:
-                                            Color.fromARGB(255, 95, 128, 149),
+                                        color: const Color.fromARGB(
+                                            255, 95, 128, 149),
                                         borderRadius:
                                             BorderRadius.circular(200),
                                       ),
-                                      child: Center(
+                                      child: const Center(
                                           child: Text(
                                         "Tidak Ada Kasus",
                                         style: TextStyle(
@@ -115,11 +164,13 @@ class SchoolHomeView extends StatelessWidget {
                                 shrinkWrap: true,
                                 mainAxisSpacing: 5,
                                 crossAxisSpacing: 10,
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 children: [
-                                  bullyingCard(
-                                    persenIcident:
-                                        "${controller.getPersen1().toStringAsFixed(2)}",
+                                  BullyingCard(
+                                    ket: "${controller.selectedFilter}",
+                                    persenIcident: controller
+                                        .getPersen1()
+                                        .toStringAsFixed(2),
                                     title: 'Penindasan Fisik',
                                     color: AppColors.contentColorBlue,
                                     sumIcident: controller
@@ -132,9 +183,11 @@ class SchoolHomeView extends StatelessWidget {
                                           arguments: 1);
                                     },
                                   ),
-                                  bullyingCard(
-                                    persenIcident:
-                                        "${controller.getPersen2().toStringAsFixed(2)}",
+                                  BullyingCard(
+                                    ket: "${controller.selectedFilter}",
+                                    persenIcident: controller
+                                        .getPersen2()
+                                        .toStringAsFixed(2),
                                     title: 'Penindasan Verbal',
                                     color: AppColors.contentColorYellow,
                                     sumIcident: controller
@@ -147,9 +200,11 @@ class SchoolHomeView extends StatelessWidget {
                                           arguments: 2);
                                     },
                                   ),
-                                  bullyingCard(
-                                    persenIcident:
-                                        "${controller.getPersen3().toStringAsFixed(2)}",
+                                  BullyingCard(
+                                    ket: "${controller.selectedFilter}",
+                                    persenIcident: controller
+                                        .getPersen3()
+                                        .toStringAsFixed(2),
                                     title: 'Penindasan Non Verbal',
                                     color: AppColors.contentColorPurple,
                                     sumIcident: controller
@@ -162,9 +217,11 @@ class SchoolHomeView extends StatelessWidget {
                                           arguments: 3);
                                     },
                                   ),
-                                  bullyingCard(
-                                    persenIcident:
-                                        "${controller.getPersen4().toStringAsFixed(2)}",
+                                  BullyingCard(
+                                    ket: "${controller.selectedFilter}",
+                                    persenIcident: controller
+                                        .getPersen4()
+                                        .toStringAsFixed(2),
                                     title: 'Penindasan Sexsual',
                                     color: AppColors.contentColorGreen,
                                     sumIcident: controller
@@ -197,7 +254,7 @@ class PieChartSample3 extends StatefulWidget {
   final double valuePersen2;
   final double valuePersen3;
   final double valuePersen4;
-  PieChartSample3({
+  const PieChartSample3({
     super.key,
     required this.valuePersen1,
     required this.valuePersen2,

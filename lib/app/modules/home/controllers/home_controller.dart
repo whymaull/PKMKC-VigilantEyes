@@ -6,7 +6,6 @@ import 'package:vigilanteyes/app/data/repositories/school_repository.dart';
 import 'package:vigilanteyes/app/routes/app_pages.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
   RxBool isLoading = false.obs;
   List<SchoolEntity>? resultListSchool;
   TextEditingController nameController = TextEditingController();
@@ -17,16 +16,6 @@ class HomeController extends GetxController {
     // _onInit();
     getListSchool();
     super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
   }
 
   void increment() => count.value++;
@@ -49,12 +38,5 @@ class HomeController extends GetxController {
     } else {
       Get.snackbar('Password', 'Salah');
     }
-  }
-
-  _onInit() {
-    print(LocalDb.idSchool);
-    if (LocalDb.idSchool != '') {
-      Get.offAllNamed(Routes.DASHBOARD_SCHOOL);
-    } else {}
   }
 }

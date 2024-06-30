@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,9 +10,13 @@ class LoginController extends GetxController {
   var isObscure = true.obs;
 
   void toggleObscure() {
-    print(" ini ${isObscure.value}");
+    if (kDebugMode) {
+      print(" ini ${isObscure.value}");
+    }
     isObscure.value = !isObscure.value;
-    print(" itu ${isObscure.value}");
+    if (kDebugMode) {
+      print(" itu ${isObscure.value}");
+    }
   }
 
   String? validateName(String? value) {
@@ -35,11 +40,6 @@ class LoginController extends GetxController {
     emailController = TextEditingController().obs;
     passwordController = TextEditingController().obs;
     super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
   }
 
   @override

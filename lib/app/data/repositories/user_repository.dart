@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:vigilanteyes/app/core/utils/constants.dart';
-import 'package:vigilanteyes/app/data/entities/school_entity.dart';
 import 'package:http/http.dart' as http;
 import 'package:vigilanteyes/app/data/entities/user_entity.dart';
 

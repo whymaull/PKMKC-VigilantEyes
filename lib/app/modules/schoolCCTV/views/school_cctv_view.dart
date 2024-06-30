@@ -1,5 +1,6 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:vigilanteyes/app/routes/app_pages.dart';
@@ -23,6 +24,9 @@ class SchoolCCTVView extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(top: 8),
                 child: TextField(
+                  onChanged: (value) {
+                    controller.searchClass(value);
+                  },
                   decoration: InputDecoration(
                     hintText: 'Search CCTV by Class',
                     hintStyle: const TextStyle(fontSize: 16),
@@ -41,58 +45,28 @@ class SchoolCCTVView extends StatelessWidget {
                 padding: EdgeInsets.only(top: 4, bottom: 16),
               ),
               Obx(() => controller.isLoading.value
-                  ? Center(
+                  ? const Center(
                       child: CircularProgressIndicator(),
                     )
-                  : Expanded(
-                      child: ListView.builder(
-                        itemCount: controller.resultKelasSchool?.length,
-                        itemBuilder: (context, index) {
-                          final resultClass =
-                              controller.resultKelasSchool?[index];
-                          return ListSchool(
-                            title: "${resultClass?.lokasiCctv}",
-                            imagePath: 'assets/logo.png',
-                            onTap: () {
-                              Get.toNamed(Routes.CLASS_DETAIL,
-                                  arguments: resultClass?.idCctv);
+                  : controller.resultKelasSchool.isEmpty
+                      ? const Center(child: Text("Data Kosong"))
+                      : Expanded(
+                          child: ListView.builder(
+                            itemCount: controller.resultKelasSchool.length,
+                            itemBuilder: (context, index) {
+                              final resultClass =
+                                  controller.resultKelasSchool[index];
+                              return ListSchool(
+                                title: "${resultClass.lokasiCctv.capitalize}",
+                                imagePath: 'assets/logo.png',
+                                onTap: () {
+                                  Get.toNamed(Routes.CLASS_DETAIL,
+                                      arguments: resultClass.idCctv);
+                                },
+                              );
                             },
-                          );
-                        },
-                      ),
-                    ))
-
-              // Expanded(
-              //   child: ListView(
-              //     children: [
-
-              //       ListSchool(
-              //         title: 'CCTV Kelas 2',
-              //         imagePath: 'assets/logo.png',
-              //       ),
-              //       ListSchool(
-              //         title: 'CCTV Kelas 3',
-              //         imagePath: 'assets/logo.png',
-              //       ),
-              //       ListSchool(
-              //         title: 'CCTV Kelas 4',
-              //         imagePath: 'assets/logo.png',
-              //       ),
-              //       ListSchool(
-              //         title: 'CCTV Kelas 5',
-              //         imagePath: 'assets/logo.png',
-              //       ),
-              //       ListSchool(
-              //         title: 'CCTV Kelas 6',
-              //         imagePath: 'assets/logo.png',
-              //       ),
-              //       ListSchool(
-              //         title: 'CCTV Kantin',
-              //         imagePath: 'assets/logo.png',
-              //       ),
-              //     ],
-              //   ),
-              // ),
+                          ),
+                        ))
             ],
           ),
         ),
@@ -107,24 +81,22 @@ class SchoolCCTVView extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Enter Password'),
+          title: const Text('Enter Password'),
           content: TextField(
             controller: passwordController,
             obscureText: true,
-            decoration: InputDecoration(hintText: 'Password'),
+            decoration: const InputDecoration(hintText: 'Password'),
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text('OK'),
+              child: const Text('OK'),
               onPressed: () {
-                // Handle password confirmation here
-                print('Password entered: ${passwordController.text}');
                 Navigator.of(context).pop();
               },
             ),

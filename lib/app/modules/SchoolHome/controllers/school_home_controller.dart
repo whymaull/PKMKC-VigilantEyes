@@ -25,8 +25,7 @@ class SchoolHomeController extends GetxController {
   @override
   void onInit() {
     getListSchool(int.parse(LocalDb.idSchool));
-    getIncedentByIdAll(LocalDb.idSchool);
-
+    getIncedentByIdAll(LocalDb.idSchool, "Hari ini");
     super.onInit();
   }
 
@@ -39,20 +38,21 @@ class SchoolHomeController extends GetxController {
 
   void applyFilter(String filter) {
     selectedFilter.value = filter;
+    getIncedentByIdAll(LocalDb.idSchool, filter);
   }
 
-  getIncedentByIdAll(String id) async {
+  getIncedentByIdAll(String id, [String? filter]) async {
     isIncidentLoading.value = true;
     final incident = IncidentRepository();
-    resultListIncident = await incident.listAll(id);
-    resultListIncidentIdSchoolAndIdBull1 =
-        await incident.listAllTypeBullnById(idSchool: id, idBullying: "1");
-    resultListIncidentIdSchoolAndIdBull2 =
-        await incident.listAllTypeBullnById(idSchool: id, idBullying: "2");
-    resultListIncidentIdSchoolAndIdBull3 =
-        await incident.listAllTypeBullnById(idSchool: id, idBullying: "3");
-    resultListIncidentIdSchoolAndIdBull4 =
-        await incident.listAllTypeBullnById(idSchool: id, idBullying: "4");
+    resultListIncident = await incident.listAll(id, filter: filter);
+    resultListIncidentIdSchoolAndIdBull1 = await incident.listAllTypeBullnById(
+        idSchool: id, idBullying: "1", filter: filter);
+    resultListIncidentIdSchoolAndIdBull2 = await incident.listAllTypeBullnById(
+        idSchool: id, idBullying: "2", filter: filter);
+    resultListIncidentIdSchoolAndIdBull3 = await incident.listAllTypeBullnById(
+        idSchool: id, idBullying: "3", filter: filter);
+    resultListIncidentIdSchoolAndIdBull4 = await incident.listAllTypeBullnById(
+        idSchool: id, idBullying: "4", filter: filter);
     isIncidentLoading.value = false;
   }
 

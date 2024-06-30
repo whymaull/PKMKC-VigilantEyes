@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:vigilanteyes/app/core/services/local_db.dart';
-import 'package:vigilanteyes/app/routes/app_pages.dart';
 import 'package:vigilanteyes/app/widget/list_school.dart';
 import 'package:vigilanteyes/app/widget/show_dialog_card.dart';
 
@@ -37,8 +35,8 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
 
-              Padding(
-                padding: const EdgeInsets.only(top: 20, bottom: 2),
+              const Padding(
+                padding: EdgeInsets.only(top: 20, bottom: 2),
                 child: Text(
                   'Pilih Sekolah',
                   textAlign: TextAlign.left,
@@ -50,12 +48,12 @@ class HomeView extends GetView<HomeController> {
               ),
               Obx(() {
                 if (controller.isLoading.value) {
-                  return Expanded(
+                  return const Expanded(
                       child: Center(child: CircularProgressIndicator()));
                 } else {
                   return Expanded(
-                      child: controller.resultListSchool!.length == 0
-                          ? Center(
+                      child: controller.resultListSchool!.isEmpty
+                          ? const Center(
                               child: Text("Tidak Ada data"),
                             )
                           : ListView.builder(

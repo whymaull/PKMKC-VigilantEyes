@@ -1,16 +1,14 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vigilanteyes/app/core/services/local_db.dart';
-import 'package:vigilanteyes/app/data/entities/client_entity.dart';
-import 'package:vigilanteyes/app/data/entities/user.dart';
-import 'package:vigilanteyes/app/data/repositories/client_repository.dart';
+import 'package:vigilanteyes/app/data/repositories/user_repository.dart';
 import 'package:vigilanteyes/app/routes/app_pages.dart';
 
 class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final _clientRepository = ClientRepository();
   final Rx<User?> _user = Rx<User?>(null);
 
   User? get user => _user.value;
@@ -105,51 +103,24 @@ class AuthController extends GetxController {
         const Center(child: CircularProgressIndicator()),
         barrierDismissible: false,
       );
-
       await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-
-      // final clientRepo = ClientRepository();
-      // final agentRepo = AgentRepository();
-      // var uuid = FirebaseAuth.instance.currentUser!.uid;
-      // print(uuid);
-
-      // String token = LocalDb.fcmToken;
-      // print(token);
-
-      // ClientEntity? resultUserClient = await clientRepo.findByUuid(uuid);
-      // AgentEntity? resultAgent = await agentRepo.findByUUID(uuid);
-      // if (resultAgent != null) {
-      //   bool isUpdateTokenAgent = await agentRepo.updateAgent(
-      //     id: resultAgent.id,
-      //     tokenAgent: token,
-      //   );
-      //   print(resultAgent.id);
-      // } else {
-      //   // Handle the case when there is no agent found for the user
-      //   print('No agent found for this user.');
-      // }
-
-      // if (resultUserClient != null) {
-      //   bool isUpdated = await clientRepo.updateClient(
-      //     id: resultUserClient.id,
-      //     tokenClient: token,
-      //   );
-      //   print(resultUserClient.id);
-      // }
-
-      // print("ini agent id $isUpdateTokenAgent ini nya  $token");
-      // print("ini agent id $isUpdated ini nya  $token");
-
-      Get.back(); // Tutup dialog loading
+      var uuid = FirebaseAuth.instance.currentUser!.uid;
+      Get.back();
       if (email == "admin@gmail.com") {
         LocalDb.loggedAdmin = true;
         Get.offAllNamed(Routes.HOME);
       } else {
-        Get.offAllNamed(Routes.DASHBOARD_SCHOOL);
         LocalDb.loggedClient = true;
+        final user = UserRepository();
+        var resultUser = await user.findByUUID(uuid);
+        if (kDebugMode) {
+          print("AUTH : ID ${resultUser!.schoolId}");
+        }
+        LocalDb.idSchool = resultUser!.schoolId.toString();
+        Get.offAllNamed(Routes.DASHBOARD_SCHOOL);
       }
       LocalDb.repeat = true;
 
@@ -187,7 +158,9 @@ class AuthController extends GetxController {
 
       await _auth.signOut();
       LocalDb.loggedAdmin = false;
-      LocalDb.repeat = true;
+      LocalDb.loggedClient = false;
+      LocalDb.idSchool = '';
+      LocalDb.repeat = false;
       Get.offAllNamed(Routes.LOGIN);
 
       Get.back(); // Tutup dialog loading

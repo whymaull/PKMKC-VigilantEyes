@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:vigilanteyes/app/core/utils/constants.dart';
 import 'package:vigilanteyes/app/data/entities/client_entity.dart';
@@ -22,7 +23,9 @@ class ClientRepository {
       'Range': '0-9'
     };
     var response = await http.get(url, headers: headers);
-    print(response.statusCode);
+    if (kDebugMode) {
+      print(response.statusCode);
+    }
     if (response.statusCode == 200) {
       // Handle successful response
       var clientList = (jsonDecode(response.body) as List)
@@ -126,7 +129,9 @@ class ClientRepository {
     };
     var response =
         await http.patch(url, headers: headers, body: jsonEncode(body));
-    print(response.statusCode);
+    if (kDebugMode) {
+      print(response.statusCode);
+    }
     return response.statusCode == 204;
   }
 
@@ -175,7 +180,9 @@ class ClientRepository {
 
     var response =
         await http.patch(url, headers: headers, body: jsonEncode(updateFields));
-    print(response.statusCode);
+    if (kDebugMode) {
+      print(response.statusCode);
+    }
     return response.statusCode == 204;
   }
 }

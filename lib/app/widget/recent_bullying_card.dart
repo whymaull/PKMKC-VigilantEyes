@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class recentBullying extends StatelessWidget {
+class RecentBullying extends StatelessWidget {
   final String className;
   final String type;
   final String date;
   final String imagePath;
   final Function()? klik;
 
-  const recentBullying({
+  const RecentBullying({
     Key? key,
     required this.className,
     required this.type,
@@ -21,13 +21,14 @@ class recentBullying extends StatelessWidget {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.only(right: 10, top: 10, left: 10, bottom: 5),
+          margin:
+              const EdgeInsets.only(right: 10, top: 10, left: 10, bottom: 5),
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                  offset: Offset(0, 0),
+                  offset: const Offset(0, 0),
                   blurRadius: 10,
                   color: Colors.black.withOpacity(0.1), // Warna bayangan
                 )
@@ -55,9 +56,9 @@ class recentBullying extends StatelessWidget {
             onTap: klik,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: const Divider(),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Divider(),
         ),
       ],
     );

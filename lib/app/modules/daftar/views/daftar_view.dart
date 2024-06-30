@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vigilanteyes/app/widget/button.dart';
 import 'package:vigilanteyes/app/widget/input_field.dart';
 
 import '../controllers/daftar_controller.dart';
@@ -21,25 +20,24 @@ class DaftarView extends GetView<DaftarController> {
                 height: 200,
               ),
               const SizedBox(height: 20),
-              const InputTextField(
+              InputTextField(
                 title: "Masukkan Nama Anda",
                 iconTextField: Icon(Icons.person),
               ),
               const SizedBox(height: 20),
-              const InputTextField(
+              InputTextField(
                 title: "Masukkan Email Anda",
                 iconTextField: Icon(Icons.email),
               ),
               const SizedBox(height: 20),
-              const InputTextField(
+              InputTextField(
                 title: "Masukkan Password Anda",
                 iconTextField: Icon(Icons.lock),
               ),
               const SizedBox(height: 30),
-              const widgetButton(
-                title: "Sign Up",
-                tinggiTombol: 56,
-              ),
+              // const CusButton(
+              //   title: "Sign Up",
+              // ),
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

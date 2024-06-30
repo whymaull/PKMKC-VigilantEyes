@@ -7,6 +7,11 @@ import 'package:vigilanteyes/app/data/repositories/user_repository.dart';
 class ProfileController extends GetxController {
   var isLoading = false.obs;
   UserEntity? resultUser;
+  @override
+  void onInit() {
+    fetchUserClientByUuid();
+    super.onInit();
+  }
 
   fetchUserClientByUuid() async {
     isLoading.value = true;

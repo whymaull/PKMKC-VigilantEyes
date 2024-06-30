@@ -2,21 +2,27 @@ import 'package:flutter/material.dart';
 
 class InputTextField extends StatelessWidget {
   final String title;
-  final Icon? iconTextField;
+  final Widget? iconTextField;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
+  TextInputType? keyboardType;
+  bool? obscureText;
 
-  const InputTextField({
+  InputTextField({
     Key? key,
     required this.title,
     this.iconTextField,
     this.validator,
     this.controller,
+    this.keyboardType,
+    this.obscureText = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: keyboardType,
+      obscureText: obscureText!,
       validator: validator,
       controller: controller,
       decoration: InputDecoration(

@@ -7,14 +7,27 @@ import 'package:http/http.dart' as http;
 
 class KelasRepository {
   final tableName = "school_cctv";
-  Future<List<KelasEntity>> listAll(String id) async {
-    var url = Uri.parse('$baseUrl/$tableName?select=*&school_id=eq.$id');
+  Future<List<KelasEntity>> listAll(
+      {required String id, String? keyword}) async {
+    String keywordFilter =
+        keyword != null ? '&lokasi_cctv=like.%25$keyword%25' : '';
+    var url = Uri.parse(
+        '$baseUrl/$tableName?select=*&school_id=eq.$id$keywordFilter');
     var headers = {'apikey': apiKey, 'Authorization': 'Bearer $apiKey'};
     final response = await http.get(url, headers: headers);
 
-    return (jsonDecode(response.body) as List)
-        .map((e) => KelasEntity.fromJson(e))
-        .toList();
+    if (response.statusCode == 200) {
+      var responseBody = jsonDecode(response.body);
+      if (responseBody is List && responseBody.isNotEmpty) {
+        return responseBody.map((e) => KelasEntity.fromJson(e)).toList();
+      } else {
+        // Handle empty list case
+        return [];
+      }
+    } else {
+      // Handle error response
+      throw Exception('Failed to load data');
+    }
   }
 
   Future<SchoolEntity?> findById(int id) async {

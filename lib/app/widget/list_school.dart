@@ -5,7 +5,7 @@ class ListSchool extends StatelessWidget {
   final String imagePath;
   final Function()? onTap;
 
-  ListSchool(
+  const ListSchool(
       {Key? key, required this.title, required this.imagePath, this.onTap})
       : super(key: key);
 
@@ -19,7 +19,7 @@ class ListSchool extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.1), // Warna bayangan
             blurRadius: 10, // Radius blur bayangan
-            offset: Offset(0, 0), // Perpindahan bayangan
+            offset: const Offset(0, 0), // Perpindahan bayangan
           ),
         ],
         color: Colors.white,
@@ -32,7 +32,7 @@ class ListSchool extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 width: 50,
                 height: 50,
                 decoration: BoxDecoration(
