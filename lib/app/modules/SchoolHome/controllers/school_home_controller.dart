@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:vigilanteyes/app/core/services/local_db.dart';
 import 'package:vigilanteyes/app/data/entities/incident_entity.dart';
 import 'package:vigilanteyes/app/data/entities/school_entity.dart';
@@ -26,6 +27,7 @@ class SchoolHomeController extends GetxController {
   void onInit() {
     getListSchool(int.parse(LocalDb.idSchool));
     getIncedentByIdAll(LocalDb.idSchool, "Hari ini");
+
     super.onInit();
   }
 

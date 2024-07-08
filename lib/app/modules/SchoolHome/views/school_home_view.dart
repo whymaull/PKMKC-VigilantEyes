@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:firebase_in_app_messaging/firebase_in_app_messaging.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -23,6 +24,8 @@ class SchoolHomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseInAppMessaging.instance.triggerEvent("test_event");
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
